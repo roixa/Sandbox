@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="toolbarType"
+            type="com.roix.semenbelalov.sandbox.ui.common.view.ToolbarType" />
+
+
+        <variable
+            name="viewmodel"
+            type="com.roix.semenbelalov.sandbox.ui.main.viewmodels.MainViewModel" />
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            bind:toolbarType="@{toolbarType}" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
