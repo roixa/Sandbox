@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.annotation.CallSuper
 import com.roix.semenbelalov.sandbox.BR
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.DatabindingDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.IDatabindingDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import ru.terrakok.cicerone.Navigator
 
@@ -12,7 +14,8 @@ import ru.terrakok.cicerone.Navigator
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseDatabindingActivity<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>() {
+abstract class BaseDatabindingActivity<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
+        , IDatabindingDelegate<DataBinding> by DatabindingDelegate() {
 
     protected lateinit var binding: DataBinding
 
@@ -25,9 +28,7 @@ abstract class BaseDatabindingActivity<ViewModel : BaseLifecycleViewModel, DataB
 
     @CallSuper
     protected open fun setupBinding() {
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
-        binding.setVariable(BR.viewmodel, viewModel)
-        binding.setLifecycleOwner(this)
+        binding = initBinding(this, getLayoutId(), viewModel)
     }
 
     override fun onResume() {

@@ -1,7 +1,6 @@
 package com.roix.semenbelalov.sandbox.ui.common.fragments
 
 import android.annotation.SuppressLint
-import android.app.Fragment
 import android.app.ProgressDialog
 import android.arch.lifecycle.*
 import android.content.Context
@@ -12,7 +11,9 @@ import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.IdRes
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,8 @@ import com.android.databinding.library.baseAdapters.BR
 import com.roix.semenbelalov.sandbox.BuildConfig
 import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.application.CommonApplication
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.DatabindingDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.IDatabindingDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -33,15 +36,12 @@ import java.lang.reflect.ParameterizedType
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment() {
+abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
+        , IDatabindingDelegate<DataBinding> by DatabindingDelegate() {
 
     protected lateinit var viewModel: ViewModel
 
     protected lateinit var binding: DataBinding
-
-    //TODO: using global progressDialog design pattern is depricated
-    private var progressDialog: ProgressDialog? = null
-
 
     //TODO strange bug after cicerone
     protected lateinit var mActivity: Activity
@@ -57,18 +57,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         viewModel = bindViewModel(getViewModelJavaClass())
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Log.d("boux", "fragment onCreateView " + javaClass)
 
-        binding = DataBindingUtil.inflate(inflater!!, getLayoutId(), container, false)
         setupUi()
+        binding = initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, viewModel)
         setupBinding()
         return binding.root
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        mActivity = context as Activity
     }
 
 
@@ -79,20 +74,11 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
 
     protected open fun setupUi() {
-        progressDialog = ProgressDialog(mActivity)
-        progressDialog?.run {
-            setMessage(getString(R.string.text_dialog_progress))
-            setCancelable(false)
-        }
 
     }
 
-    @CallSuper
     protected open fun setupBinding() {
-        with(binding) {
-            setVariable(BR.viewmodel, viewModel)
-            setLifecycleOwner(mActivity as LifecycleOwner)
-        }
+
     }
 
 
@@ -121,17 +107,6 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (progressDialog != null && progressDialog?.isShowing == true) {
-            progressDialog?.cancel()
-        }
-
-        //TODO maybe use di
-        if (BuildConfig.DEBUG) {
-            //LeakCanary.refWatcher(mActivity).buildAndInstall().watch(this)
-        }
-    }
 
     @CallSuper
     protected open fun <T : BaseLifecycleViewModel> bindViewModel(clazz: Class<T>): T {
@@ -145,13 +120,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
 
     protected open fun handleProgress(isProgress: Boolean) {
-        if (progressDialog != null) {
-            if (isProgress) {
-                progressDialog?.show()
-            } else {
-                progressDialog?.hide()
-            }
-        }
+
     }
 
     protected open fun showMessageDialog(message: String) {
