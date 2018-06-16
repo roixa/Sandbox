@@ -1,16 +1,12 @@
 package com.roix.semenbelalov.sandbox.ui.common.fragments
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.arch.lifecycle.*
-import android.content.Context
 import android.app.Activity
 import ru.terrakok.cicerone.Navigator
-import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
-import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
@@ -18,13 +14,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.android.databinding.library.baseAdapters.BR
-import com.roix.semenbelalov.sandbox.BuildConfig
-import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.DatabindingDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.IDatabindingDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.DatabindingDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IDatabindingDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import io.reactivex.Completable
 import io.reactivex.Flowable

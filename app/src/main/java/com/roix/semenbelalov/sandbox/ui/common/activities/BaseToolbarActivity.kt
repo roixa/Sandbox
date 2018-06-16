@@ -31,7 +31,7 @@ abstract class BaseToolbarActivity<ViewModel : BaseLifecycleViewModel, DataBindi
 
     @CallSuper
     open fun setupToolbar(toolbarType: ToolbarType) {
-        binding.setVariable(BR.toolbarType, toolbarType)
+        getBinding()?.setVariable(BR.toolbarType, toolbarType)
         val toolbar = getToolbar()
         if (toolbar != null) {
             toolbar.navigation_tb

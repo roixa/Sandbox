@@ -15,7 +15,7 @@ class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun getToolbar(): Toolbar? = binding.toolbar!!.tb
+    override fun getToolbar(): Toolbar? = getBinding.toolbar!!.tb
 
 }
 
