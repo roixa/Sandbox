@@ -3,6 +3,8 @@ package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.LiveDataReactiveStreams
 import android.arch.lifecycle.MutableLiveData
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.loading.LoadingLiveData
 import io.reactivex.*
 import ru.terrakok.cicerone.NavigatorHolder
@@ -14,10 +16,10 @@ import javax.inject.Inject
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseLifecycleViewModel : BaseViewModel() {
+abstract class BaseLifecycleViewModel : BaseViewModel()
+        {
 
     val loadingLiveData: LoadingLiveData = LoadingLiveData()
-    val errorLiveData: MutableLiveData<Throwable> = MutableLiveData()
     val showMessageDialogLiveData: MutableLiveData<String> = MutableLiveData()
 
     @Inject
@@ -34,13 +36,6 @@ abstract class BaseLifecycleViewModel : BaseViewModel() {
     }
 
 
-    override fun <T> Observable<T>.defaultErrorHandle(error: Throwable) {
-        errorLiveData.postValue(error)
-    }
-
-    fun Completable.defaultErrorHandle(error: Throwable) {
-        errorLiveData.postValue(error)
-    }
 
 
     fun <T> toLiveDataFun(observable: Observable<T>): LiveData<T> = LiveDataReactiveStreams.fromPublisher(
@@ -48,7 +43,6 @@ abstract class BaseLifecycleViewModel : BaseViewModel() {
                     .withDefaultLoadingHandle()
                     .withDefaultShedulers()
                     .onErrorResumeNext { t: Throwable ->
-                        errorLiveData.postValue(t)
                         loadingLiveData.onEndLoad()
                         return@onErrorResumeNext Observable.never<T>()
                     }.toFlowable(BackpressureStrategy.BUFFER))
@@ -58,7 +52,7 @@ abstract class BaseLifecycleViewModel : BaseViewModel() {
                     .withDefaultLoadingHandle()
                     .withDefaultShedulers()
                     .onErrorResumeNext { t: Throwable ->
-                        errorLiveData.postValue(t)
+                        handleError(t)
                         loadingLiveData.onEndLoad()
                         return@onErrorResumeNext Completable.never()
                     }.toFlowable())
@@ -72,7 +66,7 @@ abstract class BaseLifecycleViewModel : BaseViewModel() {
         subscription.add(
                 withDefaultLoadingHandle().withDefaultShedulers().subscribe({
                     function.invoke()
-                }, { t -> defaultErrorHandle(t) })
+                }, { t -> handleError(t) })
         )
 
     }

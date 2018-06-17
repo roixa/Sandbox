@@ -14,6 +14,10 @@ import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.application.CommonApplication
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import android.arch.lifecycle.MutableLiveData
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.ErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.ILiveDataSubscriptionDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.LiveDataSubscriptionDelegate
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -24,7 +28,9 @@ import java.lang.reflect.ParameterizedType
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCompatActivity() {
+abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
+        , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
+        , IErrorHandleViewDelegate by ErrorHandleViewDelegate() {
 
     @IdRes
     abstract fun getLayoutId(): Int
@@ -44,9 +50,10 @@ abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCo
 
     private fun <T : BaseLifecycleViewModel> bindViewModel(clazz: Class<T>): T {
         val viewModel = ViewModelProviders.of(this).get(clazz)
+        initLiveDataSubscription(this)
+        initErrorHandle(this, viewModel)
         viewModel.loadingLiveData.sub { b -> handleProgress(b) }
         viewModel.showMessageDialogLiveData.sub { s -> this.showMessageDialog(s) }
-        viewModel.errorLiveData.sub { t -> handleError(t) }
         viewModel.onBindView(application as CommonApplication)
         return viewModel
     }
@@ -71,14 +78,10 @@ abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCo
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    protected open fun handleError(throwable: Throwable) {
+    override fun handleError(throwable: Throwable) {
         Toast.makeText(this, throwable.message, Toast.LENGTH_LONG).show()
     }
 
-
-    protected fun <T> LiveData<T>.sub(func: (T) -> Unit) {
-        observe(this@BaseLifecycleActivity, Observer { T -> if (T != null) func.invoke(T) })
-    }
 
     protected fun <T> Observable<T>.sub(func: (T) -> Unit) {
         viewModel.toLiveDataFun(this).sub(func)

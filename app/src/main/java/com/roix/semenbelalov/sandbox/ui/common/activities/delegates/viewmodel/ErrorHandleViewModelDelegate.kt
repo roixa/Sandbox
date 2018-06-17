@@ -8,7 +8,7 @@ class ErrorHandleViewModelDelegate : IErrorHandleViewModelDelegate {
 
     val error = MutableLiveData<Throwable>()
 
-    override fun Observable.handleError(errorThrowable: Throwable) {
+    override fun handleError(errorThrowable: Throwable) {
         error.value = errorThrowable
     }
 

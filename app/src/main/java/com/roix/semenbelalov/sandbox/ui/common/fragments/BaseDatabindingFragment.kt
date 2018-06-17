@@ -33,7 +33,6 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     protected lateinit var viewModel: ViewModel
 
-    protected lateinit var binding: DataBinding
 
     //TODO strange bug after cicerone
     protected lateinit var mActivity: Activity
@@ -53,9 +52,8 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         Log.d("boux", "fragment onCreateView " + javaClass)
 
         setupUi()
-        binding = initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, viewModel)
-        setupBinding()
-        return binding.root
+
+        return initBinding(activity as AppCompatActivity,getLayoutId(),inflater,container,viewModel).root
     }
 
 
@@ -105,7 +103,6 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         val viewModel = ViewModelProviders.of(mActivity as FragmentActivity).get(clazz)
         viewModel.loadingLiveData.sub { b -> if (b != null) handleProgress(b) }
         viewModel.showMessageDialogLiveData.sub { s -> if (s != null) this.showMessageDialog(s) }
-        viewModel.errorLiveData.sub { t -> if (t != null) handleError(t) }
         viewModel.onBindView(mActivity.application as CommonApplication)
         return viewModel
     }

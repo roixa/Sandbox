@@ -3,6 +3,8 @@ package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
 import com.roix.semenbelalov.sandbox.application.CommonApplication
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.utils.rx.general.RxSchedulersAbs
 
 import com.roix.semenbelalov.sandbox.ui.common.loading.ILoadingObserver
@@ -19,7 +21,8 @@ import javax.inject.Inject
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel()
+        , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate() {
 
     private var viewsCount = 0
 
@@ -89,13 +92,12 @@ abstract class BaseViewModel : ViewModel() {
 
     abstract fun <T> Observable<T>.withDefaultLoadingHandle(): Observable<T>
 
-    abstract fun <T> Observable<T>.defaultErrorHandle(error: Throwable)
 
     fun <T> Observable<T>.sub(function: (T) -> Unit) {
         subscription.add(
                 withDefaultLoadingHandle().withDefaultShedulers().subscribe({ T ->
                     function.invoke(T)
-                }, { t -> defaultErrorHandle(t) })
+                }, { t -> handleError(t) })
         )
     }
 
