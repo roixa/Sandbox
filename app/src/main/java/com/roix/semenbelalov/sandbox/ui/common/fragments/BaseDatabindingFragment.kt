@@ -15,8 +15,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.DatabindingDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IDatabindingDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.DatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IDatabindingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -29,7 +29,7 @@ import java.lang.reflect.ParameterizedType
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
-        , IDatabindingDelegate<DataBinding> by DatabindingDelegate() {
+        , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate() {
 
     protected lateinit var viewModel: ViewModel
 

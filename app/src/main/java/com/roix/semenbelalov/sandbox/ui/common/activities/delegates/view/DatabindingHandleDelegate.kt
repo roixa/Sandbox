@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.BR
 import java.lang.ref.WeakReference
 
-class DatabindingDelegate<DataBinding : ViewDataBinding> : IDatabindingDelegate<DataBinding> {
+class DatabindingHandleDelegate<out DataBinding : ViewDataBinding> : IDatabindingHandleDelegate<DataBinding> {
 
     private lateinit var bindingWeakReference: WeakReference<DataBinding>
 

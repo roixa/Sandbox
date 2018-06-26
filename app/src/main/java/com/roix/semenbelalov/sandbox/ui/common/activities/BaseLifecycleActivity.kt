@@ -83,27 +83,6 @@ abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCo
     }
 
 
-    protected fun <T> Observable<T>.sub(func: (T) -> Unit) {
-        viewModel.toLiveDataFun(this).sub(func)
-    }
-
-    protected fun <T> Single<T>.sub(func: (T) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).sub(func)
-    }
-
-    protected fun <T> Completable.sub(func: (T) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable<T>()).sub(func)
-    }
-
-    protected fun <T> Flowable<T>.sub(func: (T) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).sub(func)
-    }
-
-    protected fun <T> MutableLiveData<T>.setValueNoHistory(t: T) {
-        value = (t)
-        value = (null)
-    }
-
     private fun getViewModelJavaClass(): Class<ViewModel> {
         return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
     }
