@@ -14,10 +14,7 @@ import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.application.CommonApplication
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import android.arch.lifecycle.MutableLiveData
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.ErrorHandleViewDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IErrorHandleViewDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.ILiveDataSubscriptionDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.LiveDataSubscriptionDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -30,7 +27,8 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
-        , IErrorHandleViewDelegate by ErrorHandleViewDelegate() {
+        , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
+        , IShowMessageDelegate by ShowMessageDelegate() {
 
     @IdRes
     abstract fun getLayoutId(): Int
@@ -52,8 +50,8 @@ abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCo
         val viewModel = ViewModelProviders.of(this).get(clazz)
         initLiveDataSubscription(this)
         initErrorHandle(this, viewModel)
+        initShowMessageHandle(this, this, viewModel)
         viewModel.loadingLiveData.sub { b -> handleProgress(b) }
-        viewModel.showMessageDialogLiveData.sub { s -> this.showMessageDialog(s) }
         viewModel.onBindView(application as CommonApplication)
         return viewModel
     }

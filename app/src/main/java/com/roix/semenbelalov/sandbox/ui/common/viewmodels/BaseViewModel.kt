@@ -5,6 +5,8 @@ import android.support.annotation.CallSuper
 import com.roix.semenbelalov.sandbox.application.CommonApplication
 import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.utils.rx.general.RxSchedulersAbs
 
 import com.roix.semenbelalov.sandbox.ui.common.loading.ILoadingObserver
@@ -22,7 +24,8 @@ import javax.inject.Inject
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseViewModel : ViewModel()
-        , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate() {
+        , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate()
+        , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate() {
 
     private var viewsCount = 0
 

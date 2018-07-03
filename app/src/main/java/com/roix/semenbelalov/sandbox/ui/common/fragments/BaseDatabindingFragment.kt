@@ -15,8 +15,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.DatabindingHandleDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.*
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -29,7 +30,10 @@ import java.lang.reflect.ParameterizedType
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
-        , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate() {
+        , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate()
+        , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
+        , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
+        , IShowMessageDelegate by ShowMessageDelegate() {
 
     protected lateinit var viewModel: ViewModel
 
@@ -53,7 +57,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
         setupUi()
 
-        return initBinding(activity as AppCompatActivity,getLayoutId(),inflater,container,viewModel).root
+        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, viewModel).root
     }
 
 
@@ -102,7 +106,10 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
     protected open fun <T : BaseLifecycleViewModel> bindViewModel(clazz: Class<T>): T {
         val viewModel = ViewModelProviders.of(mActivity as FragmentActivity).get(clazz)
         viewModel.loadingLiveData.sub { b -> if (b != null) handleProgress(b) }
-        viewModel.showMessageDialogLiveData.sub { s -> if (s != null) this.showMessageDialog(s) }
+
+        initLiveDataSubscription(this)
+        initErrorHandle(this, viewModel)
+        initShowMessageHandle(activity!!, this, viewModel)
         viewModel.onBindView(mActivity.application as CommonApplication)
         return viewModel
     }
@@ -114,63 +121,6 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     protected open fun showMessageDialog(message: String) {
         //Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-    }
-
-    protected open fun handleError(throwable: Throwable) {
-        //Toast.makeText(activity, throwable.message, Toast.LENGTH_LONG).show()
-    }
-
-    protected fun <T> LiveData<T>.sub(func: (T?) -> Unit) {
-        observe(mActivity as FragmentActivity, Observer { T -> func.invoke(T) })
-    }
-
-    protected fun <T> LiveData<T>.subNoHistory(func: (T?) -> Unit) {
-        var isUsed = false
-        observe(mActivity as FragmentActivity, Observer { T ->
-            if (!isUsed) {
-                func.invoke(T)
-                isUsed = true
-            }
-        })
-    }
-
-
-    protected fun <T> Observable<T>.subNoHistory(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this).subNoHistory(func)
-    }
-
-    protected fun <T> Single<T>.subNoHistory(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).subNoHistory(func)
-    }
-
-    protected fun Completable.subNoHistory(func: (Boolean?) -> Unit) {
-        viewModel.toLiveDataFun(this).subNoHistory(func)
-    }
-
-    protected fun <T> Flowable<T>.subNoHistory(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).subNoHistory(func)
-    }
-
-    protected fun <T> Observable<T>.sub(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this).sub(func)
-    }
-
-    protected fun <T> Single<T>.sub(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).sub(func)
-    }
-
-    protected fun Completable.sub(func: (Boolean?) -> Unit) {
-        viewModel.toLiveDataFun(this).sub(func)
-    }
-
-    protected fun <T> Flowable<T>.sub(func: (T?) -> Unit) {
-        viewModel.toLiveDataFun(this.toObservable()).sub(func)
-    }
-
-
-    fun <T> MutableLiveData<T>.setValueNoHistory(t: T) {
-        value = (t)
-        value = (null)
     }
 
 

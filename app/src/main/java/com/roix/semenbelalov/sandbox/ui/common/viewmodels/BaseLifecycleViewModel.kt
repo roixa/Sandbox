@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveDataReactiveStreams
 import android.arch.lifecycle.MutableLiveData
 import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.loading.LoadingLiveData
 import io.reactivex.*
 import ru.terrakok.cicerone.NavigatorHolder
@@ -16,11 +17,9 @@ import javax.inject.Inject
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseLifecycleViewModel : BaseViewModel()
-        {
+abstract class BaseLifecycleViewModel : BaseViewModel(){
 
     val loadingLiveData: LoadingLiveData = LoadingLiveData()
-    val showMessageDialogLiveData: MutableLiveData<String> = MutableLiveData()
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -34,8 +33,6 @@ abstract class BaseLifecycleViewModel : BaseViewModel()
     fun Completable.withDefaultLoadingHandle(): Completable {
         return withLoadingHandle(loadingLiveData)
     }
-
-
 
 
     fun <T> toLiveDataFun(observable: Observable<T>): LiveData<T> = LiveDataReactiveStreams.fromPublisher(
