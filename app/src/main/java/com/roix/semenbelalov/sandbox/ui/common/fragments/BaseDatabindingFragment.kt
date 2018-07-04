@@ -30,12 +30,13 @@ import java.lang.reflect.ParameterizedType
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
+        , LayoutIdProvider
         , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate()
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
-        , IShowMessageDelegate by ShowMessageDelegate() {
-
-    protected lateinit var viewModel: ViewModel
+        , IShowMessageDelegate by ShowMessageDelegate()
+        , ILoadingHandleDelegate by LoadingHandleDelegate()
+        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate<ViewModel>() {
 
 
     //TODO strange bug after cicerone
@@ -43,21 +44,22 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     protected open fun getNavigator(): Navigator? = null
 
-    abstract fun getLayoutId(): Int
-
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("boux", "fragment onCreate " + javaClass)
-        viewModel = bindViewModel(getViewModelJavaClass())
+        initViewModel(activity as FragmentActivity)
+        initLoadingHandle(this, getViewModel())
+
+        initLiveDataSubscription(this)
+        initErrorHandle(this, getViewModel())
+        initShowMessageHandle(activity!!, this, getViewModel())
+        initLoadingHandle(this, getViewModel())
+        getViewModel().onBindView(activity!!.application as CommonApplication)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        Log.d("boux", "fragment onCreateView " + javaClass)
-
         setupUi()
-
-        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, viewModel).root
+        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
     }
 
 
@@ -70,11 +72,6 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
     protected open fun setupUi() {
 
     }
-
-    protected open fun setupBinding() {
-
-    }
-
 
     //handle this if you want to refresh data in a reattached fragment
     protected open fun refresh() {
@@ -89,7 +86,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         super.onResume()
         val navigator = getNavigator()
         if (navigator != null) {
-            viewModel.navigatorHolder.setNavigator(navigator)
+            getViewModel().navigatorHolder.setNavigator(navigator)
         }
     }
 
@@ -97,36 +94,8 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         super.onPause()
         val navigator = getNavigator()
         if (navigator != null) {
-            viewModel.navigatorHolder.removeNavigator()
+            getViewModel().navigatorHolder.removeNavigator()
         }
     }
-
-
-    @CallSuper
-    protected open fun <T : BaseLifecycleViewModel> bindViewModel(clazz: Class<T>): T {
-        val viewModel = ViewModelProviders.of(mActivity as FragmentActivity).get(clazz)
-        viewModel.loadingLiveData.sub { b -> if (b != null) handleProgress(b) }
-
-        initLiveDataSubscription(this)
-        initErrorHandle(this, viewModel)
-        initShowMessageHandle(activity!!, this, viewModel)
-        viewModel.onBindView(mActivity.application as CommonApplication)
-        return viewModel
-    }
-
-
-    protected open fun handleProgress(isProgress: Boolean) {
-
-    }
-
-    protected open fun showMessageDialog(message: String) {
-        //Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
-    }
-
-
-    private fun getViewModelJavaClass(): Class<ViewModel> {
-        return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
-    }
-
 
 }

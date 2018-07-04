@@ -15,6 +15,8 @@ import com.roix.semenbelalov.sandbox.application.CommonApplication
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.*
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ILoadingViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.LoadingViewModelDelegate
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -25,64 +27,32 @@ import java.lang.reflect.ParameterizedType
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseLifecycleActivity<ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
+abstract class BaseLifecycleActivity<out ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
+        ,LayoutIdProvider
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
-        , IShowMessageDelegate by ShowMessageDelegate() {
+        , IShowMessageDelegate by ShowMessageDelegate()
+        , ILoadingHandleDelegate by LoadingHandleDelegate()
+        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate(){
 
-    @IdRes
-    abstract fun getLayoutId(): Int
-
-    protected lateinit var viewModel: ViewModel
-
-    //TODO: using global progressDialog design pattern is depricated
-    private lateinit var progressDialog: ProgressDialog
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        viewModel = bindViewModel(getViewModelJavaClass())
+        initViewModel(this)
+        initLiveDataSubscription(this)
+        initErrorHandle(this, getViewModel())
+        initShowMessageHandle(this, this, getViewModel())
+        initLoadingHandle(this, getViewModel())
+        getViewModel().onBindView(application as CommonApplication)
         setupUi()
     }
 
-    private fun <T : BaseLifecycleViewModel> bindViewModel(clazz: Class<T>): T {
-        val viewModel = ViewModelProviders.of(this).get(clazz)
-        initLiveDataSubscription(this)
-        initErrorHandle(this, viewModel)
-        initShowMessageHandle(this, this, viewModel)
-        viewModel.loadingLiveData.sub { b -> handleProgress(b) }
-        viewModel.onBindView(application as CommonApplication)
-        return viewModel
-    }
 
     protected open fun setupUi() {
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage(getString(R.string.text_dialog_progress))
-        progressDialog.setCancelable(false)
+
     }
 
-    @CallSuper
-    protected open fun handleProgress(isProgress: Boolean) {
-        if (isProgress) {
-            progressDialog.show()
-        } else {
-            progressDialog.hide()
-        }
-    }
-
-    @CallSuper
-    protected open fun showMessageDialog(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun handleError(throwable: Throwable) {
-        Toast.makeText(this, throwable.message, Toast.LENGTH_LONG).show()
-    }
-
-
-    private fun getViewModelJavaClass(): Class<ViewModel> {
-        return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
-    }
 
 }

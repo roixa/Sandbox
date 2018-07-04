@@ -19,19 +19,17 @@ import javax.inject.Inject
  */
 abstract class BaseLifecycleViewModel : BaseViewModel(){
 
-    val loadingLiveData: LoadingLiveData = LoadingLiveData()
-
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
     @Inject
     lateinit var router: Router
 
     override fun <T> Observable<T>.withDefaultLoadingHandle(): Observable<T> {
-        return withLoadingHandle(loadingLiveData)
+        return withLoadingHandle()
     }
 
     fun Completable.withDefaultLoadingHandle(): Completable {
-        return withLoadingHandle(loadingLiveData)
+        return withLoadingHandle()
     }
 
 
@@ -40,24 +38,10 @@ abstract class BaseLifecycleViewModel : BaseViewModel(){
                     .withDefaultLoadingHandle()
                     .withDefaultShedulers()
                     .onErrorResumeNext { t: Throwable ->
-                        loadingLiveData.onEndLoad()
+                        onEndLoad()
                         return@onErrorResumeNext Observable.never<T>()
                     }.toFlowable(BackpressureStrategy.BUFFER))
 
-    fun toLiveDataFun(observable: Completable): LiveData<Boolean> = LiveDataReactiveStreams.fromPublisher(
-            observable
-                    .withDefaultLoadingHandle()
-                    .withDefaultShedulers()
-                    .onErrorResumeNext { t: Throwable ->
-                        handleError(t)
-                        loadingLiveData.onEndLoad()
-                        return@onErrorResumeNext Completable.never()
-                    }.toFlowable())
-
-    fun <T> MutableLiveData<T>.setValueNoHistory(t: T) {
-        value = (t)
-        value = (null)
-    }
 
     fun Completable.sub(function: () -> Unit) {
         subscription.add(
@@ -67,14 +51,5 @@ abstract class BaseLifecycleViewModel : BaseViewModel(){
         )
 
     }
-
-
-    fun <T> Observable<T>.toLiveData(): LiveData<T> = this@BaseLifecycleViewModel.toLiveDataFun(this)
-
-    fun <T> Single<T>.toLiveData(): LiveData<T> = this@BaseLifecycleViewModel.toLiveDataFun(this.toObservable())
-
-    fun <T> Flowable<T>.toLiveData(): LiveData<T> = this@BaseLifecycleViewModel.toLiveDataFun(this.toObservable())
-
-    fun <T> Completable.toLiveData(): LiveData<T> = this@BaseLifecycleViewModel.toLiveDataFun(this.toObservable())
 
 }

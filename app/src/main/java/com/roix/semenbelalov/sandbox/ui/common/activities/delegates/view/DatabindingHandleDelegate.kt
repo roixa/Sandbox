@@ -25,7 +25,12 @@ class DatabindingHandleDelegate<out DataBinding : ViewDataBinding> : IDatabindin
         binding.setVariable(BR.viewmodel, viewmodel)
         binding.setLifecycleOwner(activity)
         bindingWeakReference = WeakReference(binding)
+        setupBinding()
         return binding
+    }
+
+    override fun setupBinding() {
+
     }
 
     override fun getBinding(): DataBinding? = bindingWeakReference.get()

@@ -3,10 +3,7 @@ package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ErrorHandleViewModelDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.*
 import com.roix.semenbelalov.sandbox.utils.rx.general.RxSchedulersAbs
 
 import com.roix.semenbelalov.sandbox.ui.common.loading.ILoadingObserver
@@ -25,7 +22,8 @@ import javax.inject.Inject
  */
 abstract class BaseViewModel : ViewModel()
         , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate()
-        , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate() {
+        , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate()
+        , ILoadingViewModelDelegate by LoadingViewModelDelegate() {
 
     private var viewsCount = 0
 
@@ -77,19 +75,19 @@ abstract class BaseViewModel : ViewModel()
         return compose(rxScheduler.getIoToMainTransformerCompletable())
     }
 
-    fun <T> Observable<T>.withLoadingHandle(loading: ILoadingObserver): Observable<T> {
+    fun <T> Observable<T>.withLoadingHandle(): Observable<T> {
         return doOnSubscribe({
-            loading.onStartLoad()
+            onStartLoad()
         }).doAfterTerminate({
-            loading.onEndLoad()
+            onEndLoad()
         })
     }
 
-    fun Completable.withLoadingHandle(loading: ILoadingObserver): Completable {
+    fun Completable.withLoadingHandle(): Completable {
         return doOnSubscribe({
-            loading.onStartLoad()
+            onStartLoad()
         }).doAfterTerminate({
-            loading.onEndLoad()
+            onEndLoad()
         })
     }
 
