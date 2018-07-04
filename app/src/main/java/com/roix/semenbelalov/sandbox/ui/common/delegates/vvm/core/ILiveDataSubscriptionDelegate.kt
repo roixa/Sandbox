@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData

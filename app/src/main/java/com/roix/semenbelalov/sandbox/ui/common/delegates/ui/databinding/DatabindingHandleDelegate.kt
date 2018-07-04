@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding

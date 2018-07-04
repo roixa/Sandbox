@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core
 
 import android.arch.lifecycle.ViewModel
 import android.support.v4.app.FragmentActivity

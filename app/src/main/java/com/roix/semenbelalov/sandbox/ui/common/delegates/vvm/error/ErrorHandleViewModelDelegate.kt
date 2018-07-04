@@ -1,8 +1,7 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import java.util.*
 
 class ErrorHandleViewModelDelegate : IErrorHandleViewModelDelegate {
 

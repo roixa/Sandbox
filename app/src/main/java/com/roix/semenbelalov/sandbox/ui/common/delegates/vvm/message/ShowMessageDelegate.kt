@@ -1,8 +1,8 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message
 
 import android.content.Context
 import android.widget.Toast
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ILiveDataSubscriptionDelegate
 import java.lang.ref.WeakReference
 
 class ShowMessageDelegate : IShowMessageDelegate {

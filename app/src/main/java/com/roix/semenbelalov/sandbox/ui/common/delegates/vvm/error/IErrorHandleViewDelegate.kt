@@ -1,6 +1,6 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error
 
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ILiveDataSubscriptionDelegate
 
 interface IErrorHandleViewDelegate {
     fun initErrorHandle(subscription: ILiveDataSubscriptionDelegate, errorSource: IErrorHandleViewModelDelegate)

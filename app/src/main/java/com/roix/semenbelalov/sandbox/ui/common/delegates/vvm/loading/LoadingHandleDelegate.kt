@@ -1,8 +1,8 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading
 
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ILoadingViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ILiveDataSubscriptionDelegate
 
-class LoadingHandleDelegate:ILoadingHandleDelegate {
+class LoadingHandleDelegate: ILoadingHandleDelegate {
 
     override fun initLoadingHandle(subscription: ILiveDataSubscriptionDelegate, source: ILoadingViewModelDelegate) {
         subscription.apply {

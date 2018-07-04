@@ -1,39 +1,30 @@
 package com.roix.semenbelalov.sandbox.ui.common.activities
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.CallSuper
-import android.support.annotation.IdRes
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
-import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.application.CommonApplication
+import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.LayoutIdProvider
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
-import android.arch.lifecycle.MutableLiveData
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.*
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ILoadingViewModelDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.LoadingViewModelDelegate
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
-import java.lang.reflect.ParameterizedType
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.*
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 
 /**
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseLifecycleActivity<out ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
-        ,LayoutIdProvider
+        , LayoutIdProvider
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
         , IShowMessageDelegate by ShowMessageDelegate()
         , ILoadingHandleDelegate by LoadingHandleDelegate()
-        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate(){
+        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate() {
 
 
     @SuppressLint("ResourceType")

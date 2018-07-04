@@ -1,29 +1,27 @@
 package com.roix.semenbelalov.sandbox.ui.common.fragments
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.*
 import android.app.Activity
 import ru.terrakok.cicerone.Navigator
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.view.*
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.IShowMessageHandleViewModelDelegate
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.ShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.LayoutIdProvider
+import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.DatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.*
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
-import java.lang.reflect.ParameterizedType
 
 /**
  * Created by roix template

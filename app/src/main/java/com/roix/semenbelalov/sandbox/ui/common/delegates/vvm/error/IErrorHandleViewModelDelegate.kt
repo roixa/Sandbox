@@ -1,7 +1,6 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error
 
 import android.arch.lifecycle.LiveData
-import java.util.*
 
 interface IErrorHandleViewModelDelegate {
     fun handleError(error: Throwable)

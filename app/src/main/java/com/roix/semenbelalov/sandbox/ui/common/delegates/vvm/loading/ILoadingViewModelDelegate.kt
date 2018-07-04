@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel
+package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading
 
 import android.arch.lifecycle.LiveData
 

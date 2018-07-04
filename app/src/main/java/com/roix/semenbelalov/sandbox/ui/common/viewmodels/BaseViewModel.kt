@@ -3,10 +3,14 @@ package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.activities.delegates.viewmodel.*
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.utils.rx.general.RxSchedulersAbs
 
-import com.roix.semenbelalov.sandbox.ui.common.loading.ILoadingObserver
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
