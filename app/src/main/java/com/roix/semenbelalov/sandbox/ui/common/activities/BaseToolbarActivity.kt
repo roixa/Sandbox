@@ -11,6 +11,9 @@ import android.widget.LinearLayout
 import com.roix.semenbelalov.sandbox.BR
 import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.databinding.MenuItemBinding
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.toolbar.IToolbarDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.toolbar.ToolbarDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.toolbar.ToolbarProvider
 import com.roix.semenbelalov.sandbox.ui.common.view.ToolbarType
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import kotlinx.android.synthetic.main.toolbar.view.*
@@ -19,93 +22,17 @@ import kotlinx.android.synthetic.main.toolbar.view.*
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseToolbarActivity<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : BaseDatabindingActivity<ViewModel, DataBinding>() {
+abstract class BaseToolbarActivity< ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding>
+    : BaseDatabindingActivity<ViewModel, DataBinding>()
+        , IToolbarDelegate by ToolbarDelegate()
+        , ToolbarProvider {
 
-    abstract fun getToolbar(): Toolbar?
 
     @CallSuper
     override fun setupUi() {
         super.setupUi()
-        setupToolbar((ToolbarType(this)))
+        initToolbarDelegate(this, this, this)
     }
 
-    @CallSuper
-    open fun setupToolbar(toolbarType: ToolbarType) {
-        getBinding()?.setVariable(BR.toolbarType, toolbarType)
-        val toolbar = getToolbar()
-        if (toolbar != null) {
-            toolbar.navigation_tb
-                    .setOnClickListener({
-                        if (R.drawable.ic_navigation_menu === toolbarType.icon) {
-                            openNavigationView()
-                        } else if (R.drawable.ic_back === toolbarType.icon) {
-                            goBack()
-                        }
-                    })
-            clearToolbarItems()
-        }
-    }
-
-    /**
-     * Adds menu item to toolbar.
-     *
-     * @param drawableIcon    item icon
-     * @param onClickListener action on click
-     */
-    fun addToolbarItem(@DrawableRes drawableIcon: Int, onClickListener: View.OnClickListener) {
-        val toolbar = getToolbar()
-        if (toolbar != null) {
-            val view = LayoutInflater.from(this).inflate(R.layout.menu_item, getToolbar(), false)
-            view.setOnClickListener(onClickListener)
-            val itemContainer = toolbar.ll_items as LinearLayout
-            itemContainer.addView(view)
-            val menuItemBinding = MenuItemBinding.bind(view)
-            menuItemBinding.icon = ContextCompat.getDrawable(this, drawableIcon)
-        }
-    }
-
-    fun addToolbarItem(view: View) {
-        val toolbar = getToolbar()
-        if (toolbar != null) {
-            val itemContainer = toolbar.ll_items as LinearLayout
-            itemContainer.addView(view)
-        }
-    }
-
-    fun clearToolbarItems() {
-        val toolbar = getToolbar()
-
-        if (toolbar != null) {
-            val itemContainer = toolbar.ll_items as LinearLayout
-            itemContainer.removeAllViews()
-        }
-    }
-
-    fun hideToolbarItems() {
-        val toolbar = getToolbar()
-
-        if (toolbar != null) {
-            val itemContainer = toolbar.ll_items as LinearLayout
-            var i = 0
-            while (i < itemContainer.childCount) {
-                itemContainer.getChildAt(i).visibility = View.GONE
-                i++
-            }
-        }
-    }
-
-    /**
-     * Finishes activity.
-     */
-    protected open fun goBack() {
-        supportFinishAfterTransition()
-    }
-
-    /**
-     * Open navigation view when click on hamburger
-     */
-    protected open fun openNavigationView() {
-        // Need to override in child
-    }
 
 }

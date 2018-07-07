@@ -15,12 +15,13 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingHan
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
+import java.lang.reflect.ParameterizedType
 
 /**
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseLifecycleActivity<out ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
+abstract class BaseLifecycleActivity< ViewModel : BaseLifecycleViewModel> : AppCompatActivity()
         , LayoutIdProvider
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
@@ -33,7 +34,7 @@ abstract class BaseLifecycleActivity<out ViewModel : BaseLifecycleViewModel> : A
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        initViewModel(this)
+        initViewModel(this, getViewModelJavaClass())
         initLiveDataSubscription(this)
         initErrorHandle(this, getViewModel())
         initShowMessageHandle(this, this, getViewModel())
@@ -47,5 +48,8 @@ abstract class BaseLifecycleActivity<out ViewModel : BaseLifecycleViewModel> : A
 
     }
 
+    private fun getViewModelJavaClass(): Class<ViewModel> {
+        return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
+    }
 
 }

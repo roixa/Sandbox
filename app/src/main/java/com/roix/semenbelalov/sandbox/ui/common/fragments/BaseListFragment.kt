@@ -25,7 +25,7 @@ abstract class BaseListFragment<ViewModel : BaseListViewModel<Item>, DataBinding
     override fun setupUi() {
         super.setupUi()
         setupRecyclerView(getRecyclerView(),
-                BaseObservableAdapter<Item, ItemDataBinding>(viewModel.items, getItemLayoutId()),
+                BaseObservableAdapter<Item, ItemDataBinding>(getViewModel().items, getItemLayoutId()),
                 getSwipeToRefreshLayout()
         )
     }
@@ -43,7 +43,7 @@ abstract class BaseListFragment<ViewModel : BaseListViewModel<Item>, DataBinding
 
     private inner class SwipeToRefreshListListener : SwipeRefreshLayout.OnRefreshListener {
         override fun onRefresh() {
-            viewModel.refresh()
+            getViewModel().refresh()
         }
     }
 

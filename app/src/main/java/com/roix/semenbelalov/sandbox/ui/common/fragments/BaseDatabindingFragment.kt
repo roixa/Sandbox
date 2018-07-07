@@ -24,6 +24,7 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHand
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
+import java.lang.reflect.ParameterizedType
 
 /**
  * Created by roix template
@@ -46,7 +47,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel(activity as FragmentActivity)
+        initViewModel(activity as FragmentActivity,getViewModelJavaClass() )
         initLoadingHandle(this, getViewModel())
 
         initLiveDataSubscription(this)
@@ -96,6 +97,10 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         if (navigator != null) {
             getViewModel().navigatorHolder.removeNavigator()
         }
+    }
+
+    private fun getViewModelJavaClass(): Class<ViewModel> {
+        return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
     }
 
 }

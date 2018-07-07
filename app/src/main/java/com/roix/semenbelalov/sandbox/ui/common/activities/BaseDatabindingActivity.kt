@@ -11,7 +11,7 @@ import ru.terrakok.cicerone.Navigator
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseDatabindingActivity<out ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
+abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
         , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate() {
 
 
