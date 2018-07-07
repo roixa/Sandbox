@@ -11,9 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.LayoutIdProvider
-import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.DatabindingHandleDelegate
-import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.LayoutIdProvider
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.DatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.ILiveDataSubscriptionDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.LiveDataSubscriptionDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.*
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewDelegate

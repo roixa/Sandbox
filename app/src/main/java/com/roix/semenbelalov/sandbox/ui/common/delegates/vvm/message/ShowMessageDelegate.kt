@@ -2,7 +2,7 @@ package com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message
 
 import android.content.Context
 import android.widget.Toast
-import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ILiveDataSubscriptionDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.ILiveDataSubscriptionDelegate
 import java.lang.ref.WeakReference
 
 class ShowMessageDelegate : IShowMessageDelegate {

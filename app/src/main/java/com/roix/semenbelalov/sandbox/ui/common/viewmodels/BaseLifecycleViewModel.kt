@@ -28,16 +28,6 @@ abstract class BaseLifecycleViewModel : BaseViewModel(){
     }
 
 
-    fun <T> toLiveDataFun(observable: Observable<T>): LiveData<T> = LiveDataReactiveStreams.fromPublisher(
-            observable
-                    .withDefaultLoadingHandle()
-                    .withDefaultShedulers()
-                    .onErrorResumeNext { t: Throwable ->
-                        onEndLoad()
-                        return@onErrorResumeNext Observable.never<T>()
-                    }.toFlowable(BackpressureStrategy.BUFFER))
-
-
     fun Completable.sub(function: () -> Unit) {
         subscription.add(
                 withDefaultLoadingHandle().withDefaultShedulers().subscribe({

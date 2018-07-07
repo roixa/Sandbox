@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.sandbox.ui.common.activities
 
 import android.databinding.ViewDataBinding
-import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.DatabindingHandleDelegate
-import com.roix.semenbelalov.sandbox.ui.common.delegates.ui.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.DatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.IDatabindingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
 import ru.terrakok.cicerone.Navigator
 
