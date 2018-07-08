@@ -1,8 +1,15 @@
 package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 
+import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.CallSuper
-import com.roix.semenbelalov.sandbox.application.CommonApplication
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.core.IViewModelInitDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.core.ViewModelInitDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.DIToothpickDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.IDIDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.ModuleProvider
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.sub_rx.IRxSubscriptionDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.sub_rx.RxSubscriptionDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingViewModelDelegate
@@ -11,13 +18,7 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessag
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.sandbox.utils.rx.general.RxSchedulersAbs
 
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import toothpick.Scope
-import toothpick.Toothpick
-import toothpick.config.Module
 import javax.inject.Inject
 
 /**
@@ -25,88 +26,29 @@ import javax.inject.Inject
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseViewModel : ViewModel()
+        , IViewModelInitDelegate by ViewModelInitDelegate()
         , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate()
         , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate()
-        , ILoadingViewModelDelegate by LoadingViewModelDelegate() {
-
-    private var viewsCount = 0
-
-    protected val subscription: CompositeDisposable = CompositeDisposable()
-
-
-    private lateinit var viewModelScope: Scope
+        , ILoadingViewModelDelegate by LoadingViewModelDelegate()
+        , IRxSubscriptionDelegate by RxSubscriptionDelegate()
+        , IDIDelegate by DIToothpickDelegate()
+        , ModuleProvider {
 
     @Inject
     lateinit var rxScheduler: RxSchedulersAbs
 
-    protected abstract fun getModule(): Module
-
     @CallSuper
-    open fun onBindView(application: CommonApplication) {
-        if (viewsCount == 0) {
-            proceedInject(application)
-            onBindFirstView()
-        }
-        viewsCount++
+    override fun onBindFirstView(application: Application) {
+        initDIDelegate(application, this)
+        initSubscriptionDelegate(rxScheduler, this, this)
     }
 
-    @CallSuper
-    protected open fun onBindFirstView() {
-        onBindFirstView(subscription)
-    }
-
-    protected open fun proceedInject(application: CommonApplication) {
-        viewModelScope = Toothpick.openScopes(application, this)
-        viewModelScope.installModules(getModule())
-        Toothpick.inject(this, viewModelScope)
-    }
-
-
-    protected open fun onBindFirstView(subscription: CompositeDisposable) {}
 
     @CallSuper
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
-        Toothpick.closeScope(viewModelScope)
+        clearRxSubsctiptionDelegate()
+        clearDiDelegate()
     }
-
-    open fun <T> Observable<T>.withDefaultShedulers(): Observable<T> {
-        return compose(rxScheduler.getIOToMainTransformer())
-    }
-
-    open fun Completable.withDefaultShedulers(): Completable {
-        return compose(rxScheduler.getIoToMainTransformerCompletable())
-    }
-
-    fun <T> Observable<T>.withLoadingHandle(): Observable<T> {
-        return doOnSubscribe({
-            onStartLoad()
-        }).doAfterTerminate({
-            onEndLoad()
-        })
-    }
-
-    fun Completable.withLoadingHandle(): Completable {
-        return doOnSubscribe({
-            onStartLoad()
-        }).doAfterTerminate({
-            onEndLoad()
-        })
-    }
-
-    abstract fun <T> Observable<T>.withDefaultLoadingHandle(): Observable<T>
-
-
-    fun <T> Observable<T>.sub(function: (T) -> Unit) {
-        subscription.add(
-                withDefaultLoadingHandle().withDefaultShedulers().subscribe({ T ->
-                    function.invoke(T)
-                }, { t -> handleError(t) })
-        )
-    }
-
-    fun <T> Single<T>.sub(function: (T) -> Unit) = this.toObservable().sub { T -> function.invoke(T) }
-
 
 }

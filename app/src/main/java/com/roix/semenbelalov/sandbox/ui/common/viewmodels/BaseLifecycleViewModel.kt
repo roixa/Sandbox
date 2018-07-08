@@ -19,22 +19,5 @@ abstract class BaseLifecycleViewModel : BaseViewModel(){
     @Inject
     lateinit var router: Router
 
-    override fun <T> Observable<T>.withDefaultLoadingHandle(): Observable<T> {
-        return withLoadingHandle()
-    }
-
-    fun Completable.withDefaultLoadingHandle(): Completable {
-        return withLoadingHandle()
-    }
-
-
-    fun Completable.sub(function: () -> Unit) {
-        subscription.add(
-                withDefaultLoadingHandle().withDefaultShedulers().subscribe({
-                    function.invoke()
-                }, { t -> handleError(t) })
-        )
-
-    }
 
 }

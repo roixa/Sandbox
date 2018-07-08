@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.delegates.view.LayoutIdProvider
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.LayoutIdProvider
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.ILiveDataSubscriptionDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.LiveDataSubscriptionDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
