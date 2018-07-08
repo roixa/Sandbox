@@ -1,11 +1,11 @@
 package com.roix.semenbelalov.sandbox.buissness.common
 
-import io.reactivex.Single
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list_rx.ListSingleSource
 
 /**
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-interface IBaseListInteractor<Item> {
-    fun loadItems(page: Int): Single<List<Item>>
+interface IBaseListInteractor<Item> : ListSingleSource<Item> {
+
 }

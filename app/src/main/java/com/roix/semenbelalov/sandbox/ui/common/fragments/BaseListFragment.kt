@@ -1,50 +1,24 @@
 package com.roix.semenbelalov.sandbox.ui.common.fragments
 
 import android.databinding.ViewDataBinding
-import android.support.annotation.LayoutRes
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.RecyclerView
-import com.roix.semenbelalov.sandbox.ui.common.adapters.BaseObservableAdapter
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list_rx.IListHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list_rx.ListHandleViewDelagate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list_rx.ListProvider
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseListViewModel
-import android.support.v7.widget.LinearLayoutManager
 
 /**
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseListFragment<ViewModel : BaseListViewModel<Item>, DataBinding : ViewDataBinding, ItemDataBinding : ViewDataBinding, Item>
-    : BaseDatabindingFragment<ViewModel, DataBinding>() {
+    : BaseDatabindingFragment<ViewModel, DataBinding>()
+        , IListHandleViewDelegate<Item> by ListHandleViewDelagate<Item, DataBinding>()
+        , ListProvider {
 
-    @LayoutRes
-    protected abstract fun getItemLayoutId(): Int
-
-    protected abstract fun getRecyclerView(): RecyclerView
-
-    protected abstract fun getSwipeToRefreshLayout(): SwipeRefreshLayout?
 
     override fun setupUi() {
         super.setupUi()
-        setupRecyclerView(getRecyclerView(),
-                BaseObservableAdapter<Item, ItemDataBinding>(getViewModel().items, getItemLayoutId()),
-                getSwipeToRefreshLayout()
-        )
-    }
-
-    open fun <ItemDataBinding : ViewDataBinding> setupRecyclerView(recyclerView: RecyclerView,
-                                                                   baseAdapter: BaseObservableAdapter<Item, ItemDataBinding>,
-                                                                   swipeToRefreshLayout: SwipeRefreshLayout?) {
-        recyclerView.apply {
-            val manager = LinearLayoutManager(context)
-            layoutManager = manager
-            adapter = baseAdapter
-            swipeToRefreshLayout?.setOnRefreshListener(SwipeToRefreshListListener())
-        }
-    }
-
-    private inner class SwipeToRefreshListListener : SwipeRefreshLayout.OnRefreshListener {
-        override fun onRefresh() {
-            getViewModel().refresh()
-        }
+        initListHandle(this, getViewModel())
     }
 
 

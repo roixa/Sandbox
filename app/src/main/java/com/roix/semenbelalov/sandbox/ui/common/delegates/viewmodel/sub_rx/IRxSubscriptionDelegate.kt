@@ -17,6 +17,8 @@ interface IRxSubscriptionDelegate {
     fun Completable.withLoadingHandle(): Completable
     fun <T> Observable<T>.sub(function: (T) -> Unit)
     fun <T> Single<T>.sub(function: (T) -> Unit)
+    fun <T>sub(function: (T) -> Unit, single: Single<T>)
+
     fun Completable.sub(function: () -> Unit)
     fun clearRxSubsctiptionDelegate()
 

@@ -63,6 +63,11 @@ class RxSubscriptionDelegate : IRxSubscriptionDelegate {
         toObservable().sub(function)
     }
 
+    override fun <T> sub(function: (T) -> Unit, single: Single<T>) {
+        single.toObservable().sub(function)
+    }
+
+
     override fun Completable.sub(function: () -> Unit) {
         subscription.add(
                 withLoadingHandle()
