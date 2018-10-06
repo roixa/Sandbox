@@ -1,6 +1,5 @@
-package com.roix.semenbelalov.sandbox.buissness.main
+package com.roix.semenbelalov.sandbox.buissness
 
-import com.roix.semenbelalov.sandbox.data.repositories.common_api.ICommonApiRepository
 import com.roix.semenbelalov.sandbox.data.repositories.common_api.CommonApiRepository
 
 import javax.inject.Inject

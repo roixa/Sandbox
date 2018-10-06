@@ -1,7 +1,7 @@
-package com.roix.semenbelalov.sandbox.toothpick.main
+package com.roix.semenbelalov.sandbox.toothpick
 
-import com.roix.semenbelalov.sandbox.buissness.main.IMainInteractor
-import com.roix.semenbelalov.sandbox.buissness.main.MainInteractor
+import com.roix.semenbelalov.sandbox.buissness.IMainInteractor
+import com.roix.semenbelalov.sandbox.buissness.MainInteractor
 import toothpick.config.Module
 
 /**

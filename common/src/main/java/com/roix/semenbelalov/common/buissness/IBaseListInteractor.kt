@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.common.buissness.common
+package com.roix.semenbelalov.common.buissness
 
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.ListSingleSource
 

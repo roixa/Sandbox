@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.toothpick.common
+package com.roix.semenbelalov.common.di
 
 
 /**

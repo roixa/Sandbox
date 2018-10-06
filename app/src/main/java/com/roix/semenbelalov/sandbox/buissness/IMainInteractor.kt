@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.buissness.main
+package com.roix.semenbelalov.sandbox.buissness
 
 /**
  * Created by roix template

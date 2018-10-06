@@ -1,6 +1,6 @@
 package com.roix.semenbelalov.common.ui.viewmodels
 
-import com.roix.semenbelalov.common.buissness.common.IBaseListInteractor
+import com.roix.semenbelalov.common.buissness.IBaseListInteractor
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.IListHandleViewModelDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.ListHandleViewModelDelegate
 

@@ -1,4 +1,4 @@
-package com.roix.semenbelalov.sandbox.toothpick.common
+package com.roix.semenbelalov.sandbox.toothpick
 
 import android.content.Context
 import com.roix.semenbelalov.common.utils.rx.general.RxSchedulers
