@@ -1,10 +1,10 @@
 package com.roix.semenbelalov.sandbox.ui.main.viewmodels
 
+import com.roix.semenbelalov.common.ui.viewmodels.BaseLifecycleViewModel
 import com.roix.semenbelalov.sandbox.buissness.main.IMainInteractor
 import com.roix.semenbelalov.sandbox.toothpick.main.MainModule
-import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
-import javax.inject.Inject
 import toothpick.config.Module
+import javax.inject.Inject
 
 /**
  * Created by roix template

@@ -1,9 +1,9 @@
 package com.roix.semenbelalov.sandbox.ui.main.views
 
 import android.support.v7.widget.Toolbar
+import com.roix.semenbelalov.common.databinding.ActivityMainBinding
+import com.roix.semenbelalov.common.ui.activities.BaseToolbarActivity
 import com.roix.semenbelalov.sandbox.R
-import com.roix.semenbelalov.sandbox.databinding.ActivityMainBinding
-import com.roix.semenbelalov.sandbox.ui.common.activities.BaseToolbarActivity
 import com.roix.semenbelalov.sandbox.ui.main.viewmodels.MainViewModel
 
 /**
