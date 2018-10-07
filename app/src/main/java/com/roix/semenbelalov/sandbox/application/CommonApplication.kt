@@ -5,7 +5,7 @@ import com.roix.semenbelalov.common.di.ApplicationScope
 import com.roix.semenbelalov.sandbox.BuildConfig
 import com.roix.semenbelalov.sandbox.FactoryRegistry
 import com.roix.semenbelalov.sandbox.MemberInjectorRegistry
-import com.roix.semenbelalov.sandbox.toothpick.ApplicationModule
+import com.roix.semenbelalov.sandbox.di.ApplicationModule
 import ru.terrakok.cicerone.Cicerone
 import toothpick.Toothpick
 import toothpick.Toothpick.setConfiguration
