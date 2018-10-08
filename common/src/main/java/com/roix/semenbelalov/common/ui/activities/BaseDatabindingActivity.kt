@@ -13,7 +13,7 @@ import ru.terrakok.cicerone.Navigator
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
-        , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate() {
+        , IDatabindingHandleDelegate<DataBinding,ViewModel> by DatabindingHandleDelegate() {
 
 
     protected open fun getNavigator(): Navigator? = null

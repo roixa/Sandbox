@@ -15,11 +15,11 @@ import java.lang.ref.WeakReference
 
 class ToolbarDelegate : IToolbarDelegate {
 
-    lateinit var databinding: WeakReference<IDatabindingHandleDelegate<*>>
+    lateinit var databinding: WeakReference<IDatabindingHandleDelegate<*, *>>
     lateinit var toolbarProvider: WeakReference<ToolbarProvider>
     lateinit var context: WeakReference<Context>
 
-    override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*>, toolbar: ToolbarProvider, c: Context) {
+    override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*, *>, toolbar: ToolbarProvider, c: Context) {
         databinding = WeakReference(databindingDelegate)
         toolbarProvider = WeakReference(toolbar)
         context = WeakReference(c)

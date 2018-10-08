@@ -31,7 +31,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
         , LayoutIdProvider
-        , IDatabindingHandleDelegate<DataBinding> by DatabindingHandleDelegate()
+        , IDatabindingHandleDelegate<DataBinding,ViewModel> by DatabindingHandleDelegate()
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
         , IShowMessageDelegate by ShowMessageDelegate()

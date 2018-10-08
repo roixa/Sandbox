@@ -7,7 +7,7 @@ import com.roix.semenbelalov.common.ui.delegates.view.databinding.IDatabindingHa
 import com.roix.semenbelalov.common.ui.view.ToolbarType
 
 interface IToolbarDelegate {
-    fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*>, toolbarProvider: ToolbarProvider, context: Context)
+    fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*,*>, toolbarProvider: ToolbarProvider, context: Context)
     fun setupToolbar(toolbarType: ToolbarType)
     fun addToolbarItem(@DrawableRes drawableIcon: Int, onClickListener: View.OnClickListener)
     fun addToolbarItem(view: View)
