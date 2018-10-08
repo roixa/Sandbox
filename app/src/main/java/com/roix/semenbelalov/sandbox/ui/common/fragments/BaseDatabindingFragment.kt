@@ -1,22 +1,20 @@
 package com.roix.semenbelalov.sandbox.ui.common.fragments
 
-import android.app.Activity
-import ru.terrakok.cicerone.Navigator
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roix.semenbelalov.sandbox.application.CommonApplication
-import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.LayoutIdProvider
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.DatabindingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.LayoutIdProvider
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.ILiveDataSubscriptionDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.sub_livedata.LiveDataSubscriptionDelegate
-import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.*
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.IViewModelHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ViewModelHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingHandleDelegate
@@ -24,6 +22,7 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHand
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
+import ru.terrakok.cicerone.Navigator
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -41,13 +40,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
 
     //TODO strange bug after cicerone
-    protected lateinit var mActivity: Activity
+    protected lateinit var mActivity: AppCompatActivity
 
     protected open fun getNavigator(): Navigator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel(activity as FragmentActivity,getViewModelJavaClass() )
+        initViewModel(activity as AppCompatActivity,getViewModelJavaClass() )
         initLoadingHandle(this, getViewModel())
 
         initLiveDataSubscription(this)
