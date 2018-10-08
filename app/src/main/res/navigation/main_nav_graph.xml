@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav_graph"
+    app:startDestination="@id/secondFragment">
+
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.roix.semenbelalov.featuredetails.ui.views.DetailsActivity"
+        android:label="DetailsActivity" />
+    <fragment
+        android:id="@+id/secondFragment"
+        app:defaultNavHost="true"
+        android:name="com.roix.semenbelalov.featuremain.ui.views.SecondFragment"
+        android:label="SecondFragment" >
+        <action
+            android:id="@+id/action_secondFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
+</navigation>

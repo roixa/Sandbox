@@ -15,6 +15,19 @@
         android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView second"
+             />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="357dp"
+            android:layout_height="269dp"
+            android:text="Button"
+             />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

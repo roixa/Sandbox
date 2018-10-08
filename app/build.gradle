@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.roix.semenbelalov.sandbox"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -99,6 +99,7 @@ dependencies {
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     kapt "com.android.databinding:compiler:$android_plugin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
 }
 
 kapt {
