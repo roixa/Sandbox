@@ -17,5 +17,11 @@ class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun getToolbar(): Toolbar? = getBinding()?.toolbar!!.tb
 
+
+    override fun setupBinding() {
+        super.setupBinding()
+
+    }
+
 }
 
