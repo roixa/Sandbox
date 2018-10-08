@@ -1,10 +1,8 @@
 package com.roix.semenbelalov.common.ui.fragments
 
-import android.app.Activity
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -41,13 +39,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
 
     //TODO strange bug after cicerone
-    protected lateinit var mActivity: Activity
+    protected lateinit var mActivity: AppCompatActivity
 
     protected open fun getNavigator(): Navigator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel(activity as FragmentActivity,getViewModelJavaClass() )
+        initViewModel(activity as AppCompatActivity,getViewModelJavaClass() )
         initLoadingHandle(this, getViewModel())
 
         initLiveDataSubscription(this)
