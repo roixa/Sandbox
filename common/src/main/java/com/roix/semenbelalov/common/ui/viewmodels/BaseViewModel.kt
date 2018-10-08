@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.ViewModel
-import android.support.annotation.CallSuper
+import androidx.annotation.CallSuper
+import androidx.lifecycle.ViewModel
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.IViewModelInitDelegate
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.ViewModelInitDelegate
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.di_toothpick.DIToothpickDelegate

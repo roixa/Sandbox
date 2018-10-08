@@ -1,6 +1,7 @@
 package com.roix.semenbelalov.common.ui.activities
 
-import android.databinding.ViewDataBinding
+
+import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.DatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.IDatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.viewmodels.BaseLifecycleViewModel

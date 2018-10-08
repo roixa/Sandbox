@@ -1,7 +1,7 @@
 package com.roix.semenbelalov.common.ui.activities
 
-import android.databinding.ViewDataBinding
-import android.support.annotation.CallSuper
+import androidx.annotation.CallSuper
+import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.common.ui.delegates.view.toolbar.IToolbarDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.toolbar.ToolbarDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.toolbar.ToolbarProvider

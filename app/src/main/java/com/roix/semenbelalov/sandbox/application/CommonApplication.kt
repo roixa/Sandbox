@@ -1,10 +1,10 @@
 package com.roix.semenbelalov.sandbox.application
 
 import android.app.Application
+import com.roix.semenbelalov.common.BuildConfig
+import com.roix.semenbelalov.common.FactoryRegistry
+import com.roix.semenbelalov.common.MemberInjectorRegistry
 import com.roix.semenbelalov.common.di.ApplicationScope
-import com.roix.semenbelalov.sandbox.BuildConfig
-import com.roix.semenbelalov.sandbox.FactoryRegistry
-import com.roix.semenbelalov.sandbox.MemberInjectorRegistry
 import com.roix.semenbelalov.sandbox.di.ApplicationModule
 import ru.terrakok.cicerone.Cicerone
 import toothpick.Toothpick

@@ -1,10 +1,10 @@
 package com.roix.semenbelalov.common.ui.delegates.view.toolbar
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import com.roix.semenbelalov.common.BR
 import com.roix.semenbelalov.common.R
 import com.roix.semenbelalov.common.databinding.MenuItemBinding

@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.adapters
 
-import android.databinding.ObservableList
-import android.databinding.ViewDataBinding
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.ObservableList
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
 /**

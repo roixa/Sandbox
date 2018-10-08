@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.delegates.vvm.list_rx
 
-import android.databinding.ViewDataBinding
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.roix.semenbelalov.common.ui.adapters.BaseObservableAdapter
 import java.lang.ref.WeakReference
 

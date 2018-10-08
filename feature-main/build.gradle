@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -37,16 +37,19 @@ dependencies {
     implementation project(":common")
 
 
-    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:1.0.8'
-    implementation 'com.github.stephanenicolas.toothpick:smoothie:1.0.8'
-    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:1.0.8'
+    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.3'
+    implementation 'com.github.stephanenicolas.toothpick:smoothie:1.1.3'
+    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.3'
 
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    kapt "androidx.databinding:databinding-compiler:3.2.0"
+
 }
 apply plugin: "kotlin-kapt"
 
@@ -54,8 +57,7 @@ kapt {
     generateStubs = true
 
     arguments {
-        arg("toothpick_registry_package_name", "com.roix.semenbelalov.sandbox")
-        arg("toothpick_registry_children_package_names", "toothpick.smoothie")
+        arg("toothpick_registry_package_name", "com.roix.semenbelalov.common")
     }
 }
 

@@ -1,6 +1,6 @@
 package com.roix.semenbelalov.common.ui.delegates.vvm.list_rx
 
-import android.databinding.ObservableList
+import androidx.databinding.ObservableList
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.sub_rx.IRxSubscriptionDelegate
 
 interface IListHandleViewModelDelegate<Item> {

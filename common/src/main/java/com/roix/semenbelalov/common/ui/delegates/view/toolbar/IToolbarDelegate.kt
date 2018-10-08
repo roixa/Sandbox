@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.delegates.view.toolbar
 
 import android.content.Context
-import android.support.annotation.DrawableRes
 import android.view.View
+import androidx.annotation.DrawableRes
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.IDatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.view.ToolbarType
 

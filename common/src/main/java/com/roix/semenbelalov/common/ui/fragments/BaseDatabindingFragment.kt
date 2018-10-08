@@ -1,12 +1,13 @@
 package com.roix.semenbelalov.common.ui.fragments
 
-import android.databinding.ViewDataBinding
+
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.DatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.IDatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.LayoutIdProvider

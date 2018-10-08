@@ -2,7 +2,7 @@ package com.roix.semenbelalov.common.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.LayoutIdProvider
 import com.roix.semenbelalov.common.ui.delegates.view.sub_livedata.ILiveDataSubscriptionDelegate
 import com.roix.semenbelalov.common.ui.delegates.view.sub_livedata.LiveDataSubscriptionDelegate

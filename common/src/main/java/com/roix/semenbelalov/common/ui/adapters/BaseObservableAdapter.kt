@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.adapters
 
-import android.databinding.ObservableList
-import android.databinding.ViewDataBinding
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
+import androidx.databinding.ObservableList
+import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.common.BR
 
 /**

@@ -1,6 +1,6 @@
 package com.roix.semenbelalov.common.ui.delegates.vvm.error
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 
 interface IErrorHandleViewModelDelegate {
     fun handleError(error: Throwable)

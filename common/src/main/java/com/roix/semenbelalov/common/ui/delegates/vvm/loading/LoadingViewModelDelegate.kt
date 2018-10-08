@@ -1,6 +1,6 @@
 package com.roix.semenbelalov.common.ui.delegates.vvm.loading
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.roix.semenbelalov.common.ui.loading.LoadingLiveData
 
 class LoadingViewModelDelegate : ILoadingViewModelDelegate {

@@ -34,19 +34,19 @@ class RxSubscriptionDelegate : IRxSubscriptionDelegate {
     }
 
     override fun <T> Observable<T>.withLoadingHandle(): Observable<T> {
-        return doOnSubscribe({
+        return doOnSubscribe {
             loading.onStartLoad()
-        }).doAfterTerminate({
+        }.doAfterTerminate {
             loading.onEndLoad()
-        })
+        }
     }
 
     override fun Completable.withLoadingHandle(): Completable {
-        return doOnSubscribe({
+        return doOnSubscribe {
             loading.onStartLoad()
-        }).doAfterTerminate({
+        }.doAfterTerminate {
             loading.onEndLoad()
-        })
+        }
     }
 
     override fun <T> Observable<T>.sub(function: (T) -> Unit) {

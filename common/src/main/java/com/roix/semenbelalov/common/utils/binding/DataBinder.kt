@@ -1,12 +1,12 @@
 package com.roix.semenbelalov.common.utils.binding
 
-import android.databinding.BindingAdapter
-import android.databinding.BindingConversion
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import com.squareup.picasso.Picasso
 
 /**

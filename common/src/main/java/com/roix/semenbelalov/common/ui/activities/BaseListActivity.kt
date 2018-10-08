@@ -1,6 +1,6 @@
 package com.roix.semenbelalov.common.ui.activities
 
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.IListHandleViewDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.ListHandleViewDelagate
 import com.roix.semenbelalov.common.ui.delegates.vvm.list_rx.ListProvider

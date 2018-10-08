@@ -1,10 +1,10 @@
 package com.roix.semenbelalov.common.ui.delegates.view.databinding
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.common.BR
 import java.lang.ref.WeakReference
 

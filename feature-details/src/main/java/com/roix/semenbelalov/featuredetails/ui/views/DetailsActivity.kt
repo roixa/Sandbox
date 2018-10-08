@@ -1,6 +1,7 @@
 package com.roix.semenbelalov.featuredetails.ui.views
 
-import android.support.v7.widget.Toolbar
+
+import androidx.appcompat.widget.Toolbar
 import com.roix.semenbelalov.common.ui.activities.BaseToolbarActivity
 import com.roix.semenbelalov.featuredetails.R
 import com.roix.semenbelalov.featuredetails.databinding.ActivityDetailsBinding

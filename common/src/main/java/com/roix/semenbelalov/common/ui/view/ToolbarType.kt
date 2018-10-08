@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.common.ui.view
 
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.roix.semenbelalov.common.R
 
 /**
