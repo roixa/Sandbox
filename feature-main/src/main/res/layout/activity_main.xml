@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
@@ -27,18 +28,13 @@
             layout="@layout/toolbar"
             bind:toolbarType="@{toolbarType}" />
 
-        <TextView
+        <fragment
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewmodel.text}" />
-        <!--<fragment-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/my_nav_host_fragment"-->
-            <!--android:name="androidx.navigation.fragment.NavHostFragment"-->
-            <!--app:navGraph="@navigation/main_nav_graph"-->
-            <!--app:defaultNavHost="true"-->
-            <!--/>-->
+            android:layout_height="match_parent"
+            android:id="@+id/my_nav_host_fragment"
+            app:defaultNavHost="true"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/feature_main_nav_graph" />
 
 
 

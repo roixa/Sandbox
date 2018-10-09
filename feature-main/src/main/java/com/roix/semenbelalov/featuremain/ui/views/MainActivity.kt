@@ -1,6 +1,7 @@
 package com.roix.semenbelalov.featuremain.ui.views
 
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.Navigation
 import com.roix.semenbelalov.common.ui.activities.BaseToolbarActivity
 import com.roix.semenbelalov.featuremain.R
 import com.roix.semenbelalov.featuremain.databinding.ActivityMainBinding
@@ -20,7 +21,7 @@ class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun setupBinding() {
         super.setupBinding()
-
+        val navController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
     }
 
 }
