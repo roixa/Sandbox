@@ -11,12 +11,12 @@
 
         <variable
             name="viewmodel"
-            type="com.roix.semenbelalov.sandbox.ui.main.viewmodels.MainViewModel" />
+            type="com.roix.semenbelalov.featuremain.ui.viewmodels.MainViewModel" />
 
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -27,6 +27,6 @@
             layout="@layout/toolbar"
             bind:toolbarType="@{toolbarType}" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

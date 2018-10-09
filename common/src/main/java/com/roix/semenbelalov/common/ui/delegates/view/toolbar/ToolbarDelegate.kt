@@ -28,18 +28,18 @@ class ToolbarDelegate : IToolbarDelegate {
 
     override fun setupToolbar(toolbarType: ToolbarType) {
         databinding.get()?.getBinding()?.setVariable(BR.toolbarType, toolbarType)
-        val toolbar = toolbarProvider.get()?.getToolbar()
-        if (toolbar != null) {
-            toolbar.navigation_tb
-                    .setOnClickListener {
-                        if (R.drawable.ic_navigation_menu === toolbarType.icon) {
-                            openNavigationView()
-                        } else if (R.drawable.ic_back === toolbarType.icon) {
-                            goBack()
-                        }
-                    }
-            clearToolbarItems()
-        }
+//        val toolbar = toolbarProvider.get()?.getToolbar()
+//        if (toolbar != null) {
+//            toolbar.navigation_tb
+//                    .setOnClickListener {
+//                        if (R.drawable.ic_navigation_menu === toolbarType.icon) {
+//                            openNavigationView()
+//                        } else if (R.drawable.ic_back === toolbarType.icon) {
+//                            goBack()
+//                        }
+//                    }
+//            clearToolbarItems()
+//        }
     }
 
     override fun addToolbarItem(drawableIcon: Int, onClickListener: View.OnClickListener) {
