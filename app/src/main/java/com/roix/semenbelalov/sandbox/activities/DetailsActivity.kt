@@ -1,11 +1,11 @@
-package com.roix.semenbelalov.featuredetails.ui.views
+package com.roix.semenbelalov.sandbox.activities
 
 
 import androidx.appcompat.widget.Toolbar
 import com.roix.semenbelalov.common.ui.activities.BaseToolbarActivity
-import com.roix.semenbelalov.featuredetails.R
-import com.roix.semenbelalov.featuredetails.databinding.ActivityDetailsBinding
 import com.roix.semenbelalov.featuredetails.ui.viewmodels.DetailsViewModel
+import com.roix.semenbelalov.sandbox.R
+import com.roix.semenbelalov.sandbox.databinding.ActivityDetailsBinding
 
 /**
  * Created by roix template
