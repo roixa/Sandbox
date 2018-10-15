@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
 
 class LiveDataSubscriptionDelegate : ILiveDataSubscriptionDelegate {
 
-    lateinit var lifecycleOwnerWeakReference: WeakReference<LifecycleOwner>
+    var lifecycleOwnerWeakReference = WeakReference<LifecycleOwner>(null)
 
     override fun initLiveDataSubscription(livecycleOwner: LifecycleOwner) {
         lifecycleOwnerWeakReference = WeakReference(livecycleOwner)

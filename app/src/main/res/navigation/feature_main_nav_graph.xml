@@ -8,13 +8,10 @@
         android:id="@+id/secondFragment"
         android:name="com.roix.semenbelalov.featuremain.ui.views.SecondFragment"
         android:label="SecondFragment"
-        app:defaultNavHost="true">
-        <action
-            android:id="@+id/action_secondFragment_to_detailsActivity"
-            app:destination="@id/detailsActivity" />
+        >
     </fragment>
-    <activity
-        android:id="@+id/detailsActivity"
-        android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"
-        android:label="DetailsActivity" />
+    <!--<activity-->
+        <!--android:id="@+id/detailsActivity"-->
+        <!--android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"-->
+        <!--android:label="DetailsActivity" />-->
 </navigation>

@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 
 }
