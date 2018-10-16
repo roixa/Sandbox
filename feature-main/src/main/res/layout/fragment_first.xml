@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.roix.semenbelalov.featuremain.ui.viewmodels.SecondViewModel" />
+            type="com.roix.semenbelalov.featuremain.ui.viewmodels.FirstViewModel" />
 
     </data>
 
@@ -22,22 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-             />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="second fragment"
+            android:text="fist fragment"
             app:layout_constraintTop_toBottomOf="@+id/button" />
-        <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/details_nav_host_fragment"-->
-        <!--app:defaultNavHost="true"-->
-        <!--android:name="androidx.navigation.fragment.NavHostFragment"-->
-        <!--app:navGraph="@navigation/feature_details_nav_graph" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

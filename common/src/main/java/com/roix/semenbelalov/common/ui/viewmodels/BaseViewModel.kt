@@ -3,8 +3,8 @@ package com.roix.semenbelalov.common.ui.viewmodels
 import android.app.Application
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.IViewModelInitDelegate
-import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.ViewModelInitDelegate
+import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.IViewModelLyfecycleDelegate
+import com.roix.semenbelalov.common.ui.delegates.viewmodel.core.ViewModelLifecycleDelegate
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.di_toothpick.DIToothpickDelegate
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.di_toothpick.IDIDelegate
 import com.roix.semenbelalov.common.ui.delegates.viewmodel.di_toothpick.ModuleProvider
@@ -24,7 +24,7 @@ import javax.inject.Inject
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseViewModel : ViewModel()
-        , IViewModelInitDelegate by ViewModelInitDelegate()
+        , IViewModelLyfecycleDelegate by ViewModelLifecycleDelegate()
         , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate()
         , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate()
         , ILoadingViewModelDelegate by LoadingViewModelDelegate()

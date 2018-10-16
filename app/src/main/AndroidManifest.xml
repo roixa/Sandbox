@@ -11,7 +11,7 @@
         <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.DetailsActivity" />
-        <activity android:name=".activities.NotDatabindingActivity">
+        <activity android:name=".activities.AppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

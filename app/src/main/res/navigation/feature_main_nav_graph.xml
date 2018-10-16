@@ -2,14 +2,26 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/feature_main_nav_graph"
-    app:startDestination="@id/secondFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
-        android:id="@+id/secondFragment"
+        android:id="@id/secondFragment"
         android:name="com.roix.semenbelalov.featuremain.ui.views.SecondFragment"
         android:label="SecondFragment"
         >
     </fragment>
+    <fragment
+        android:id="@id/firstFragment"
+        android:name="com.roix.semenbelalov.featuremain.ui.views.FirstFragment"
+        android:label="FirstFragment" />
+    <fragment
+        android:id="@id/thirdFragment"
+        android:name="com.roix.semenbelalov.featuredetails.ui.views.ThirdFragment"
+        android:label="ThirdFragment" />
+    <activity
+        android:id="@id/detailsActivity"
+        android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"
+        android:label="DetailsActivity" />
     <!--<activity-->
         <!--android:id="@+id/detailsActivity"-->
         <!--android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"-->

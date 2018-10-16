@@ -57,9 +57,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     }
 
+    open fun setupBinding() {}
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         setupUi()
-        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
+        val ret = initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
+        setupBinding()
+        return ret
     }
 
 

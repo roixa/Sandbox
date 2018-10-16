@@ -20,7 +20,7 @@ class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
 
     override fun setupBinding() {
-        super.setupBinding()
+       super.setupBinding()
         val finalHost = NavHostFragment.create(R.navigation.feature_main_nav_graph)
         supportFragmentManager.beginTransaction()
                 .replace(R.id.root, finalHost)

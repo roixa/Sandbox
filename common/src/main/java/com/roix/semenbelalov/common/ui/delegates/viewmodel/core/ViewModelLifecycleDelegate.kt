@@ -2,7 +2,7 @@ package com.roix.semenbelalov.common.ui.delegates.viewmodel.core
 
 import android.app.Application
 
-class ViewModelInitDelegate : IViewModelInitDelegate {
+class ViewModelLifecycleDelegate : IViewModelLyfecycleDelegate {
 
     private var viewsCount = 0
 
@@ -16,6 +16,8 @@ class ViewModelInitDelegate : IViewModelInitDelegate {
     override fun onBindFirstView() {
 
     }
+
+
 
     override fun onBindFirstView(application: Application) {
         onBindFirstView()

@@ -3,18 +3,23 @@ package com.roix.semenbelalov.common.ui.delegates.viewmodel.di_toothpick
 import android.app.Application
 import toothpick.Scope
 import toothpick.Toothpick
+import java.lang.ref.WeakReference
 
 class DIToothpickDelegate : IDIDelegate {
 
-    lateinit var viewModelScope: Scope
+    var viewModelScope = WeakReference<Scope>(null)
 
     override fun initDIDelegate(application: Application, moduleProvider: ModuleProvider) {
-        viewModelScope = Toothpick.openScopes(application, this)
-        viewModelScope.installModules(moduleProvider.getModule())
-        Toothpick.inject(this, viewModelScope)
+
+        val scope = Toothpick.openScopes(application, this)
+        scope.installModules(moduleProvider.getModule())
+        Toothpick.inject(this, scope)
+        viewModelScope = WeakReference(scope)
     }
 
     override fun clearDiDelegate() {
-        Toothpick.closeScope(viewModelScope)
+        viewModelScope.get()?.let {
+            Toothpick.closeScope(it)
+        }
     }
 }

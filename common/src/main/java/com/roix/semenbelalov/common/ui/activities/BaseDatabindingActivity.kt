@@ -21,9 +21,10 @@ abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out 
     override fun setupUi() {
         super.setupUi()
         initBinding(this,getLayoutId(), getViewModel())
-
+        setupBinding()
     }
 
+    open fun setupBinding() {}
 
     override fun onResume() {
         super.onResume()

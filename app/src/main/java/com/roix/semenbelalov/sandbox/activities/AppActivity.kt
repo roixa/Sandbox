@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.roix.semenbelalov.sandbox.R
 
-class NotDatabindingActivity : AppCompatActivity() {
+//TODO experemental navigation without databinding  do with
+class AppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_not_databinding)
+        setContentView(R.layout.activity_app)
     }
 }
