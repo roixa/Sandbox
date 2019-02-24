@@ -21,6 +21,8 @@ import com.roix.semenbelalov.common.ui.delegates.vvm.loading.ILoadingHandleDeleg
 import com.roix.semenbelalov.common.ui.delegates.vvm.loading.LoadingHandleDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.message.IShowMessageDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.message.ShowMessageDelegate
+import com.roix.semenbelalov.common.ui.delegates.vvm.navigation.INavigationDelegate
+import com.roix.semenbelalov.common.ui.delegates.vvm.navigation.NavigationDelegate
 import com.roix.semenbelalov.common.ui.viewmodels.BaseLifecycleViewModel
 import ru.terrakok.cicerone.Navigator
 import java.lang.reflect.ParameterizedType
@@ -36,7 +38,8 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
         , IShowMessageDelegate by ShowMessageDelegate()
         , ILoadingHandleDelegate by LoadingHandleDelegate()
-        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate<ViewModel>() {
+        , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate<ViewModel>()
+        , INavigationDelegate by NavigationDelegate() {
 
 
     //TODO strange bug after cicerone
@@ -52,7 +55,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         initLiveDataSubscription(this)
         initErrorHandle(this, getViewModel())
         initShowMessageHandle(activity!!, this, getViewModel())
-        initLoadingHandle(this, getViewModel())
+
         getViewModel().onBindView(activity!!.application )
 
     }
@@ -61,29 +64,17 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         setupUi()
-        val ret = initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
+        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initNavigationHandle(getBinding()?.root!!, this, getViewModel())
         setupBinding()
-        return ret
     }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        refresh()
-    }
-
 
     protected open fun setupUi() {
 
-    }
-
-    //handle this if you want to refresh data in a reattached fragment
-    protected open fun refresh() {
-
-    }
-
-    open fun goBack(): Boolean {//return used in fragment
-        return false
     }
 
     override fun onResume() {

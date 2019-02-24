@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 class ErrorHandleViewModelDelegate : IErrorHandleViewModelDelegate {
 
-    val error = MutableLiveData<Throwable>()
+    private val error = MutableLiveData<Throwable>()
 
     override fun handleError(errorThrowable: Throwable) {
         error.value = errorThrowable

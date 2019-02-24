@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nav_graph" type="id" />
+    <item name="secondFragment" type="id" />
+    <item name="firstFragment" type="id" />
+    <item name="thirdFragment" type="id" />
+    <item name="detailsActivity" type="id" />
+
+</resources>

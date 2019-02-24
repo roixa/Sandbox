@@ -16,6 +16,8 @@ import com.roix.semenbelalov.common.ui.delegates.vvm.loading.ILoadingViewModelDe
 import com.roix.semenbelalov.common.ui.delegates.vvm.loading.LoadingViewModelDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.message.IShowMessageHandleViewModelDelegate
 import com.roix.semenbelalov.common.ui.delegates.vvm.message.ShowMessageHandleViewModelDelegate
+import com.roix.semenbelalov.common.ui.delegates.vvm.navigation.IViewModelNavigationDelegate
+import com.roix.semenbelalov.common.ui.delegates.vvm.navigation.ViewModelNavigationDelegate
 import com.roix.semenbelalov.common.utils.rx.general.RxSchedulersAbs
 import javax.inject.Inject
 
@@ -30,6 +32,7 @@ abstract class BaseViewModel : ViewModel()
         , ILoadingViewModelDelegate by LoadingViewModelDelegate()
         , IRxSubscriptionDelegate by RxSubscriptionDelegate()
         , IDIDelegate by DIToothpickDelegate()
+        , IViewModelNavigationDelegate by ViewModelNavigationDelegate()
         , ModuleProvider {
 
     @Inject

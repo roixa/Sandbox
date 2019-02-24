@@ -62,7 +62,7 @@ dependencies {
 
     implementation project(':feature-main')
     implementation project(':feature-details')
-    implementation project(":core")
+    implementation project(":navigation")
     implementation project(":common")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -96,7 +96,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta01'
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-rc01'
 
 
 }

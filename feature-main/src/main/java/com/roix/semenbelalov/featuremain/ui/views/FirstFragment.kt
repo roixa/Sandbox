@@ -1,6 +1,5 @@
 package com.roix.semenbelalov.featuremain.ui.views
 
-import androidx.navigation.Navigation
 import com.roix.semenbelalov.common.ui.fragments.BaseDatabindingFragment
 import com.roix.semenbelalov.featuremain.R
 import com.roix.semenbelalov.featuremain.databinding.FragmentFirstBinding
@@ -13,7 +12,7 @@ class FirstFragment : BaseDatabindingFragment<FirstViewModel, FragmentFirstBindi
     override fun setupBinding() {
         getBinding()?.let {
             it.button.setOnClickListener{
-                Navigation.findNavController(getBinding()!!.root).navigate(R.id.secondFragment)
+                getViewModel().onButtonClicked()
             }
         }
     }

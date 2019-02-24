@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 class ShowMessageHandleViewModelDelegate : IShowMessageHandleViewModelDelegate {
 
-    val message = MutableLiveData<String>()
+    private val message = MutableLiveData<String>()
 
     override fun handleShowMessage(text: String) {
         message.value = text
