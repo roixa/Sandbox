@@ -11,7 +11,7 @@ import com.roix.semenbelalov.common.ui.viewmodels.BaseLifecycleViewModel
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseToolbarActivity< ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding>
+abstract class BaseToolbarActivity< ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding>
     : BaseDatabindingActivity<ViewModel, DataBinding>()
         , IToolbarDelegate by ToolbarDelegate()
         , ToolbarProvider {

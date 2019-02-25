@@ -5,5 +5,5 @@ import androidx.lifecycle.LiveData
 interface ILoadingViewModelDelegate {
     fun onStartLoad()
     fun onEndLoad()
-    fun getLoadingLiveData(): LiveData<Boolean>
+    val loadingLiveData: LiveData<Boolean>
 }

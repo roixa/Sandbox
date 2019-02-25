@@ -36,10 +36,10 @@ abstract class BaseLifecycleActivity< ViewModel : BaseLifecycleViewModel> : AppC
         setContentView(getLayoutId())
         initViewModel(this, getViewModelJavaClass())
         initLiveDataSubscription(this)
-        initErrorHandle(this, getViewModel())
-        initShowMessageHandle(this, this, getViewModel())
-        initLoadingHandle(this, getViewModel())
-        getViewModel().onBindView(application)
+        initErrorHandle(this, viewModel)
+        initShowMessageHandle(this, this, viewModel)
+        initLoadingHandle(this, viewModel)
+        viewModel.onBindView(application)
         setupUi()
     }
 

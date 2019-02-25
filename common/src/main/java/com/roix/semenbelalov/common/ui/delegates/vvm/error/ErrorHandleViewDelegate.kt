@@ -6,7 +6,7 @@ class ErrorHandleViewDelegate : IErrorHandleViewDelegate {
 
     override fun initErrorHandle(subscription: ILiveDataSubscriptionDelegate, errorSource: IErrorHandleViewModelDelegate) {
         subscription.apply {
-            errorSource.getErrorLiveData().sub {
+            errorSource.errorLiveData.sub {
                 handleError(it)
             }
         }

@@ -6,5 +6,5 @@ import com.roix.semenbelalov.common.ui.delegates.viewmodel.sub_rx.IRxSubscriptio
 interface IListHandleViewModelDelegate<Item> {
     fun initListHandle(source: ListSingleSource<Item>, subDelegate: IRxSubscriptionDelegate)
     fun refresh()
-    fun getItems(): ObservableList<Item>
+    val items: ObservableList<Item>
 }

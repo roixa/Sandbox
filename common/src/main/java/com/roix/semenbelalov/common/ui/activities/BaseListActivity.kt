@@ -18,7 +18,7 @@ abstract class BaseListActivity<ViewModel : BaseListViewModel<Item>, DataBinding
 
     override fun setupUi() {
         super.setupUi()
-        initListHandle(this, getViewModel())
+        initListHandle(this, viewModel)
     }
 
 

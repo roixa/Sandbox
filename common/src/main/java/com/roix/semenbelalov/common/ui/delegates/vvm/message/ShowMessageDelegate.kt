@@ -12,7 +12,7 @@ class ShowMessageDelegate : IShowMessageDelegate {
     override fun initShowMessageHandle(c: Context, subscription: ILiveDataSubscriptionDelegate, source: IShowMessageHandleViewModelDelegate) {
         context = WeakReference(c)
         subscription.apply {
-            source.getShowMessageLiveData().sub {
+            source.showMessageLiveData.sub {
                 showMessage(it)
             }
         }

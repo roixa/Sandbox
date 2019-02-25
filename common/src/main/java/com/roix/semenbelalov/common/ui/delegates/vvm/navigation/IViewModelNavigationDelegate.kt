@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.roix.semenbelalov.common.ui.delegates.vvm.navigation.commands.ScreenCommand
 
 interface IViewModelNavigationDelegate {
-    fun getNavigationLiveData(): LiveData<ScreenCommand>
+    val navigationLiveData: LiveData<ScreenCommand>
 
     fun nextScreen(screenId: Int)
     fun nextScreen(screenId: Int, params: Any)

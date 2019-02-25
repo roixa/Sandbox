@@ -15,7 +15,7 @@ class NavigationDelegate : INavigationDelegate {
     override fun initNavigationHandle(view: View, subscription: ILiveDataSubscriptionDelegate, source: IViewModelNavigationDelegate) {
         navController = Navigation.findNavController(view)
         subscription.apply {
-            source.getNavigationLiveData().sub {
+            source.navigationLiveData.sub {
                 when (it) {
                     is ForwardScreenCommand -> goForward()
                     is BackScreenCommand -> goBack()

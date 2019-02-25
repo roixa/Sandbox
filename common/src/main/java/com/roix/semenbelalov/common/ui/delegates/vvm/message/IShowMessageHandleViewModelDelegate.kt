@@ -4,5 +4,5 @@ import androidx.lifecycle.LiveData
 
 interface IShowMessageHandleViewModelDelegate {
     fun handleShowMessage(text: String)
-    fun getShowMessageLiveData(): LiveData<String>
+    val showMessageLiveData: LiveData<String>
 }

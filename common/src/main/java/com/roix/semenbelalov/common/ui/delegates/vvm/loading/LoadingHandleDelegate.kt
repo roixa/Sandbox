@@ -6,7 +6,7 @@ class LoadingHandleDelegate: ILoadingHandleDelegate {
 
     override fun initLoadingHandle(subscription: ILiveDataSubscriptionDelegate, source: ILoadingViewModelDelegate) {
         subscription.apply {
-            source.getLoadingLiveData().sub {
+            source.loadingLiveData.sub {
                 handleProgress(it)
             }
         }

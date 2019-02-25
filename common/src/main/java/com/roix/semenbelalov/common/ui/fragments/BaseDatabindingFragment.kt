@@ -50,13 +50,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel(activity as AppCompatActivity,getViewModelJavaClass() )
-        initLoadingHandle(this, getViewModel())
+        initLoadingHandle(this, viewModel)
 
         initLiveDataSubscription(this)
-        initErrorHandle(this, getViewModel())
-        initShowMessageHandle(activity!!, this, getViewModel())
+        initErrorHandle(this, viewModel)
+        initShowMessageHandle(activity!!, this, viewModel)
 
-        getViewModel().onBindView(activity!!.application )
+        viewModel.onBindView(activity!!.application )
 
     }
 
@@ -64,12 +64,12 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         setupUi()
-        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, getViewModel()).root
+        return initBinding(activity as AppCompatActivity, getLayoutId(), inflater, container, viewModel).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initNavigationHandle(getBinding()?.root!!, this, getViewModel())
+        initNavigationHandle(binding.root, this, viewModel)
         setupBinding()
     }
 
@@ -81,7 +81,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         super.onResume()
         val navigator = getNavigator()
         if (navigator != null) {
-            getViewModel().navigatorHolder.setNavigator(navigator)
+            viewModel.navigatorHolder.setNavigator(navigator)
         }
     }
 
@@ -89,7 +89,7 @@ abstract class BaseDatabindingFragment<ViewModel : BaseLifecycleViewModel, DataB
         super.onPause()
         val navigator = getNavigator()
         if (navigator != null) {
-            getViewModel().navigatorHolder.removeNavigator()
+            viewModel.navigatorHolder.removeNavigator()
         }
     }
 

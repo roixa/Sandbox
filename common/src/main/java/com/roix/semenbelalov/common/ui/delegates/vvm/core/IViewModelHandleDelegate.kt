@@ -5,6 +5,5 @@ import androidx.lifecycle.ViewModel
 
 interface IViewModelHandleDelegate< ViewModelType : ViewModel> {
     fun initViewModel(activity: AppCompatActivity, clazz: Class<ViewModelType>)
-    fun getViewModel(): ViewModelType
-
+    var viewModel: ViewModelType
 }

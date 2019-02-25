@@ -4,6 +4,6 @@ import androidx.lifecycle.LiveData
 
 interface IErrorHandleViewModelDelegate {
     fun handleError(error: Throwable)
-    fun getErrorLiveData(): LiveData<Throwable>
+    val errorLiveData: LiveData<Throwable>
 
 }

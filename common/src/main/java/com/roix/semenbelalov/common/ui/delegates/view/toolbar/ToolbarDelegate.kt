@@ -11,23 +11,22 @@ import com.roix.semenbelalov.common.databinding.MenuItemBinding
 import com.roix.semenbelalov.common.ui.delegates.view.databinding.IDatabindingHandleDelegate
 import com.roix.semenbelalov.common.ui.view.ToolbarType
 import kotlinx.android.synthetic.main.toolbar.view.*
-import java.lang.ref.WeakReference
 
 class ToolbarDelegate : IToolbarDelegate {
 
-    lateinit var databinding: WeakReference<IDatabindingHandleDelegate<*, *>>
-    lateinit var toolbarProvider: WeakReference<ToolbarProvider>
-    lateinit var context: WeakReference<Context>
+    lateinit var databindingDelegate: IDatabindingHandleDelegate<*, *>
+    lateinit var toolbarProvider: ToolbarProvider
+    lateinit var context: Context
 
     override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*, *>, toolbar: ToolbarProvider, c: Context) {
-        databinding = WeakReference(databindingDelegate)
-        toolbarProvider = WeakReference(toolbar)
-        context = WeakReference(c)
+        this.databindingDelegate = databindingDelegate
+        toolbarProvider = toolbar
+        context = c
         setupToolbar((ToolbarType(c)))
     }
 
     override fun setupToolbar(toolbarType: ToolbarType) {
-        databinding.get()?.getBinding()?.setVariable(BR.toolbarType, toolbarType)
+        databindingDelegate.binding.setVariable(BR.toolbarType, toolbarType)
 //        val toolbar = toolbarProvider.get()?.getToolbar()
 //        if (toolbar != null) {
 //            toolbar.navigation_tb
@@ -43,20 +42,19 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun addToolbarItem(drawableIcon: Int, onClickListener: View.OnClickListener) {
-        val toolbar = toolbarProvider.get()?.getToolbar()
-        val c = context.get()
-        if (toolbar != null && c != null) {
-            val view = LayoutInflater.from(c).inflate(R.layout.menu_item, toolbar, false)
+        val toolbar = toolbarProvider.getToolbar()
+        if (toolbar != null) {
+            val view = LayoutInflater.from(context).inflate(R.layout.menu_item, toolbar, false)
             view.setOnClickListener(onClickListener)
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.addView(view)
             val menuItemBinding = MenuItemBinding.bind(view)
-            menuItemBinding.icon = ContextCompat.getDrawable(c, drawableIcon)
+            menuItemBinding.icon = ContextCompat.getDrawable(context, drawableIcon)
         }
     }
 
     override fun addToolbarItem(view: View) {
-        val toolbar = toolbarProvider.get()?.getToolbar()
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.addView(view)
@@ -64,7 +62,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun clearToolbarItems() {
-        val toolbar = toolbarProvider.get()?.getToolbar()
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.removeAllViews()
@@ -72,7 +70,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun hideToolbarItems() {
-        val toolbar = toolbarProvider.get()?.getToolbar()
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             var i = 0

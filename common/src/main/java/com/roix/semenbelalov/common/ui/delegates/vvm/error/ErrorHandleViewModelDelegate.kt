@@ -1,15 +1,13 @@
 package com.roix.semenbelalov.common.ui.delegates.vvm.error
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class ErrorHandleViewModelDelegate : IErrorHandleViewModelDelegate {
 
-    private val error = MutableLiveData<Throwable>()
+    override val errorLiveData = MutableLiveData<Throwable>()
 
     override fun handleError(errorThrowable: Throwable) {
-        error.value = errorThrowable
+        errorLiveData.value = errorThrowable
     }
 
-    override fun getErrorLiveData(): LiveData<Throwable> = error
 }

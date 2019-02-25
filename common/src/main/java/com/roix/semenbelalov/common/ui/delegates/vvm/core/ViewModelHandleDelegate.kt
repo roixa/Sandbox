@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModelProviders
 
 class ViewModelHandleDelegate<ViewModelType : ViewModel> : IViewModelHandleDelegate<ViewModelType> {
 
-    lateinit var vm: ViewModelType
+    override lateinit var viewModel: ViewModelType
 
     override fun initViewModel(activity: AppCompatActivity, clazz: Class<ViewModelType>) {
-        vm = ViewModelProviders.of(activity).get(clazz)
+        viewModel = ViewModelProviders.of(activity).get(clazz)
     }
-
-    override fun getViewModel(): ViewModelType = vm
 
 
 }

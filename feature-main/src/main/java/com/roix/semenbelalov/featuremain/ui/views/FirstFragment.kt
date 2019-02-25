@@ -10,10 +10,8 @@ class FirstFragment : BaseDatabindingFragment<FirstViewModel, FragmentFirstBindi
     override fun getLayoutId(): Int = R.layout.fragment_first
 
     override fun setupBinding() {
-        getBinding()?.let {
-            it.button.setOnClickListener{
-                getViewModel().onButtonClicked()
-            }
+        binding.button.setOnClickListener {
+            viewModel.onButtonClicked()
         }
     }
 

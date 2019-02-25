@@ -16,8 +16,8 @@ class SecondFragment : BaseDatabindingFragment<SecondViewModel, FragmentSecondBi
 
     override fun setupBinding() {
         super.setupBinding()
-        getBinding()?.button?.setOnClickListener{
-            getViewModel().onButtonClicked()
+        binding.button.setOnClickListener {
+            viewModel.onButtonClicked()
         }
     }
 

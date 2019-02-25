@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.roix.semenbelalov.sandbox.R
 
-//TODO experemental navigation without databinding  do with
+//TODO experemental navigation without databindingDelegate  do with
 class AppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

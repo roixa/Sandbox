@@ -12,7 +12,7 @@ import ru.terrakok.cicerone.Navigator
  * Created by roix template
  * https://github.com/roixa/RoixArchitectureTemplates
  */
-abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
+abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : BaseLifecycleActivity<ViewModel>()
         , IDatabindingHandleDelegate<DataBinding,ViewModel> by DatabindingHandleDelegate() {
 
 
@@ -20,7 +20,7 @@ abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out 
 
     override fun setupUi() {
         super.setupUi()
-        initBinding(this,getLayoutId(), getViewModel())
+        initBinding(this,getLayoutId(), viewModel)
         setupBinding()
     }
 
@@ -30,7 +30,7 @@ abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out 
         super.onResume()
         val navigator = getNavigator()
         if (navigator != null) {
-            getViewModel().navigatorHolder.setNavigator(navigator)
+            viewModel.navigatorHolder.setNavigator(navigator)
         }
     }
 
@@ -38,7 +38,7 @@ abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, out 
         super.onPause()
         val navigator = getNavigator()
         if (navigator != null) {
-            getViewModel().navigatorHolder.removeNavigator()
+            viewModel.navigatorHolder.removeNavigator()
         }
     }
 }
