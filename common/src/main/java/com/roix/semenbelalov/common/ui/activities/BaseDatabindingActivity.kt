@@ -20,7 +20,7 @@ abstract class BaseDatabindingActivity< ViewModel : BaseLifecycleViewModel, Data
 
     override fun setupUi() {
         super.setupUi()
-        initBinding(this,getLayoutId(), viewModel)
+        initBinding(this, layoutId, viewModel)
         setupBinding()
     }
 

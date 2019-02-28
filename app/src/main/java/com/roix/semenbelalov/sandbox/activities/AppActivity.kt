@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.roix.semenbelalov.sandbox.R
 
-//TODO experemental navigation without databindingDelegate  do with
+//this it root activity, container of navigation only
 class AppActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app)

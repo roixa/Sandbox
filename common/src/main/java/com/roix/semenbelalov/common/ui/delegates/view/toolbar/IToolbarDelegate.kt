@@ -13,7 +13,6 @@ interface IToolbarDelegate {
     fun addToolbarItem(view: View)
     fun clearToolbarItems()
     fun hideToolbarItems()
-    fun goBack()
     fun openNavigationView()
 
 }

@@ -42,7 +42,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun addToolbarItem(drawableIcon: Int, onClickListener: View.OnClickListener) {
-        val toolbar = toolbarProvider.getToolbar()
+        val toolbar = toolbarProvider.toolbar
         if (toolbar != null) {
             val view = LayoutInflater.from(context).inflate(R.layout.menu_item, toolbar, false)
             view.setOnClickListener(onClickListener)
@@ -54,7 +54,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun addToolbarItem(view: View) {
-        val toolbar = toolbarProvider.getToolbar()
+        val toolbar = toolbarProvider.toolbar
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.addView(view)
@@ -62,7 +62,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun clearToolbarItems() {
-        val toolbar = toolbarProvider.getToolbar()
+        val toolbar = toolbarProvider.toolbar
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.removeAllViews()
@@ -70,7 +70,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun hideToolbarItems() {
-        val toolbar = toolbarProvider.getToolbar()
+        val toolbar = toolbarProvider.toolbar
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             var i = 0
@@ -79,10 +79,6 @@ class ToolbarDelegate : IToolbarDelegate {
                 i++
             }
         }
-    }
-
-    override fun goBack() {
-
     }
 
     override fun openNavigationView() {

@@ -8,11 +8,10 @@
     tools:context=".activities.AppActivity">
 
     <fragment
-        android:id="@+id/main_nav_host_fragment1"
+        android:id="@+id/app_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="test"
         app:defaultNavHost="true"
         app:navGraph="@navigation/feature_main_nav_graph" />
 

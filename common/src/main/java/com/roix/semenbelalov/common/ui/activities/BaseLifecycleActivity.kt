@@ -33,7 +33,7 @@ abstract class BaseLifecycleActivity< ViewModel : BaseLifecycleViewModel> : AppC
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        setContentView(layoutId)
         initViewModel(this, getViewModelJavaClass())
         initLiveDataSubscription(this)
         initErrorHandle(this, viewModel)

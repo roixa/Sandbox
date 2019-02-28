@@ -4,5 +4,5 @@ import androidx.appcompat.widget.Toolbar
 
 
 interface ToolbarProvider {
-    fun getToolbar(): Toolbar?
+    val toolbar: Toolbar?
 }

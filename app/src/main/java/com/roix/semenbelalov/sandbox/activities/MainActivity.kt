@@ -14,9 +14,9 @@ import com.roix.semenbelalov.sandbox.databinding.ActivityMainBinding
 
 class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
-    override fun getLayoutId(): Int = R.layout.activity_main
+    override val layoutId: Int = R.layout.activity_main
 
-    override fun getToolbar(): Toolbar? = null// getBinding()?.toolbar!!.tb
+    override val toolbar: Toolbar? = null// getBinding()?.toolbar!!.tb
 
 
     override fun setupBinding() {
@@ -29,9 +29,6 @@ class MainActivity : BaseToolbarActivity<MainViewModel, ActivityMainBinding>() {
 
         val c = NavHostFragment.findNavController(finalHost)
         c.navigate(R.id.secondFragment)
-
-//        val c = Navigation.findNavController(this, R.id.main_nav_host_fragment1)
-
     }
 
 //TODO detailsActivity id dublicate

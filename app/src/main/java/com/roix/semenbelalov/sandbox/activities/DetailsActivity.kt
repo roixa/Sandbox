@@ -12,7 +12,7 @@ import com.roix.semenbelalov.sandbox.R
 
 class DetailsActivity : BaseLifecycleActivity<DetailsViewModel>() {
 
-    override fun getLayoutId(): Int = R.layout.activity_details
+    override val layoutId: Int = R.layout.activity_details
 
 }
 

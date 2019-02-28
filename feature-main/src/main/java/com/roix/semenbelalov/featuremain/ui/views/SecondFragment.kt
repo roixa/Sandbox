@@ -12,7 +12,7 @@ import com.roix.semenbelalov.featuremain.ui.viewmodels.SecondViewModel
 
 class SecondFragment : BaseDatabindingFragment<SecondViewModel, FragmentSecondBinding>() {
 
-    override fun getLayoutId(): Int = R.layout.fragment_second
+    override val layoutId: Int = R.layout.fragment_second
 
     override fun setupBinding() {
         super.setupBinding()

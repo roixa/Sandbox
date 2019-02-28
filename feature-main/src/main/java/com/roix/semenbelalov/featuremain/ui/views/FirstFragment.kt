@@ -7,7 +7,7 @@ import com.roix.semenbelalov.featuremain.ui.viewmodels.FirstViewModel
 
 class FirstFragment : BaseDatabindingFragment<FirstViewModel, FragmentFirstBinding>() {
 
-    override fun getLayoutId(): Int = R.layout.fragment_first
+    override val layoutId: Int = R.layout.fragment_first
 
     override fun setupBinding() {
         binding.button.setOnClickListener {
