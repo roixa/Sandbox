@@ -14,7 +14,10 @@ class ThirdFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val ret = inflater.inflate(R.layout.fragment_third, container, false)
         val b = ret.findViewById<View>(R.id.button)
-        b.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.detailsActivity))
+//        b.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.detailsActivity))
+        b.setOnClickListener {
+            Navigation.findNavController(ret).popBackStack(R.id.firstFragment, false)
+        }
         return ret
     }
 

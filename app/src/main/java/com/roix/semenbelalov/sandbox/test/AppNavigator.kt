@@ -7,7 +7,7 @@ import com.roix.semenbelalov.sandbox.R
 class AppNavigator(val navController: NavController) {
     fun nextScreen(screen: String) {
         val id = if (screen == Screens.SCREEN_DETAILS) {
-            R.id.detailsActivity
+            R.id.secondFragment
         } else {
             R.id.firstFragment
         }

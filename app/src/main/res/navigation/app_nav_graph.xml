@@ -25,10 +25,6 @@
         android:id="@id/thirdFragment"
         android:name="com.roix.semenbelalov.featuredetails.ui.views.ThirdFragment"
         android:label="ThirdFragment" />
-    <activity
-        android:id="@id/detailsActivity"
-        android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"
-        android:label="DetailsActivity" />
     <!--<activity-->
         <!--android:id="@+id/detailsActivity"-->
         <!--android:name="com.roix.semenbelalov.sandbox.activities.DetailsActivity"-->
