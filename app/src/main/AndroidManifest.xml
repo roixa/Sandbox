@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.AppActivity">
+        <activity android:name="com.roix.semenbelalov.sandbox.ui.app.AppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
