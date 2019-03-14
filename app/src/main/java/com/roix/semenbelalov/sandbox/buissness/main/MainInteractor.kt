@@ -1,5 +1,6 @@
 package com.roix.semenbelalov.sandbox.buissness.main
 
+import com.roix.semenbelalov.sandbox.data.repositories.main.IMainRepository
 import javax.inject.Inject
 
 /**
@@ -7,7 +8,6 @@ import javax.inject.Inject
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 
-class MainInteractor : IMainInteractor {
-    @Inject constructor()
+class MainInteractor @Inject constructor(val repository: IMainRepository) : IMainInteractor {
 
 }

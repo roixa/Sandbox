@@ -17,7 +17,7 @@ class SplashViewModel : BaseLifecycleViewModel() {
     protected lateinit var interactor: ISplashInteractor
 
     //TODO refactor to override val
-    override fun getModule(): Module = SplashModule()
+    override val module: Module = SplashModule()
 
 
     fun onClickedButton() {

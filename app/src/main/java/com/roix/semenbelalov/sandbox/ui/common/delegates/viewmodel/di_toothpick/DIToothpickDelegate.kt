@@ -10,7 +10,7 @@ class DIToothpickDelegate : IDIDelegate {
 
     override fun initDIDelegate(application: Application, moduleProvider: ModuleProvider) {
         viewModelScope = Toothpick.openScopes(application, this)
-        viewModelScope.installModules(moduleProvider.getModule())
+        viewModelScope.installModules(moduleProvider.module)
         Toothpick.inject(this, viewModelScope)
     }
 

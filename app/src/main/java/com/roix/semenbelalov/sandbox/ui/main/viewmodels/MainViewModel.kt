@@ -15,5 +15,5 @@ class MainViewModel : BaseLifecycleViewModel() {
     @Inject
     protected lateinit var interactor: IMainInteractor
 
-    override fun getModule(): Module = MainModule()
+    override val module: Module = MainModule()
 }
