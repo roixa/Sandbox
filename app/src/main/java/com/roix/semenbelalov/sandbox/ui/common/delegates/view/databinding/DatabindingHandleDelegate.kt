@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.roix.semenbelalov.sandbox.BR
-import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
+import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseViewModel
 
-class DatabindingHandleDelegate<DataBinding : ViewDataBinding, ViewModel : BaseLifecycleViewModel> : IDatabindingHandleDelegate<DataBinding, ViewModel> {
+class DatabindingHandleDelegate<DataBinding : ViewDataBinding, ViewModel : BaseViewModel> : IDatabindingHandleDelegate<DataBinding, ViewModel> {
 
     override lateinit var binding: DataBinding
 
