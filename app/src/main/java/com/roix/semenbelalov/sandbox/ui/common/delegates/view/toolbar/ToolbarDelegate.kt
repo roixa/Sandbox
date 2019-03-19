@@ -9,40 +9,45 @@ import com.roix.semenbelalov.sandbox.BR
 import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.databinding.MenuItemBinding
 import com.roix.semenbelalov.sandbox.ui.common.delegates.view.databinding.IDatabindingHandleDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.INavigationDelegate
 import com.roix.semenbelalov.sandbox.ui.common.view.ToolbarType
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class ToolbarDelegate : IToolbarDelegate {
 
     lateinit var databindingDelegate: IDatabindingHandleDelegate<*, *>
+    lateinit var navigationDelegate: INavigationDelegate
     lateinit var toolbarProvider: ToolbarProvider
     lateinit var context: Context
+    override lateinit var toolbarType: ToolbarType
 
-    override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*, *>, toolbar: ToolbarProvider, c: Context) {
+    override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*, *>, navigationDelegate: INavigationDelegate, toolbar: ToolbarProvider, c: Context) {
         this.databindingDelegate = databindingDelegate
+        this.navigationDelegate = navigationDelegate
         toolbarProvider = toolbar
         context = c
         setupToolbar((ToolbarType(c)))
     }
 
-    override fun setupToolbar(toolbarType: ToolbarType) {
-        databindingDelegate.binding.setVariable(BR.toolbarType, toolbarType)
-//        val toolbar = toolbarProvider.get()?.getToolbar()
-//        if (toolbar != null) {
-//            toolbar.navigation_tb
-//                    .setOnClickListener {
-//                        if (R.drawable.ic_navigation_menu === toolbarType.icon) {
-//                            openNavigationView()
-//                        } else if (R.drawable.ic_back === toolbarType.icon) {
-//                            goBack()
-//                        }
-//                    }
-//            clearToolbarItems()
-//        }
+    override fun setupToolbar(type: ToolbarType) {
+        this.toolbarType = type
+        databindingDelegate.binding.setVariable(BR.toolbarType, type)
+        val toolbar = toolbarProvider.getToolbar()
+        if (toolbar != null) {
+            toolbar.navigation_tb
+                    .setOnClickListener {
+                        if (R.drawable.ic_navigation_menu == type.icon.value) {
+                            openNavigationView()
+                        } else if (R.drawable.ic_back == type.icon.value) {
+                            navigationDelegate.goBack()
+                        }
+                    }
+            clearToolbarItems()
+        }
     }
 
     override fun addToolbarItem(drawableIcon: Int, onClickListener: View.OnClickListener) {
-        val toolbar = toolbarProvider.toolbar
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val view = LayoutInflater.from(context).inflate(R.layout.menu_item, toolbar, false)
             view.setOnClickListener(onClickListener)
@@ -54,7 +59,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun addToolbarItem(view: View) {
-        val toolbar = toolbarProvider.toolbar
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.addView(view)
@@ -62,7 +67,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun clearToolbarItems() {
-        val toolbar = toolbarProvider.toolbar
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             itemContainer.removeAllViews()
@@ -70,7 +75,7 @@ class ToolbarDelegate : IToolbarDelegate {
     }
 
     override fun hideToolbarItems() {
-        val toolbar = toolbarProvider.toolbar
+        val toolbar = toolbarProvider.getToolbar()
         if (toolbar != null) {
             val itemContainer = toolbar.ll_items as LinearLayout
             var i = 0

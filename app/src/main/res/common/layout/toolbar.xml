@@ -39,7 +39,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="@{toolbarType.getTitle()}"
+                android:text="@{toolbarType.title}"
                 android:textColor="@{toolbarType.titleColor}"
                 android:textSize="@dimen/medium_text"
                 tools:ignore="ContentDescription"
@@ -57,6 +57,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="@{toolbarType.subtitle}"
+                android:textColor="@{toolbarType.subtitleColor}"
                 tools:ignore="ContentDescription"
                 tools:text="Subtitle" />
 

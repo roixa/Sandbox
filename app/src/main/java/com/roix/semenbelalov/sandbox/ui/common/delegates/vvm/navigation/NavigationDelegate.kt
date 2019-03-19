@@ -11,19 +11,23 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.commands
 class NavigationDelegate : INavigationDelegate {
 
     lateinit var navController: NavController
+    var count = 0
 
     override fun initNavigationHandle(view: View, subscription: ILiveDataSubscriptionDelegate, source: IViewModelNavigationDelegate) {
         navController = Navigation.findNavController(view)
-        subscription.apply {
-            source.navigationLiveData.sub {
-                when (it) {
-                    is ForwardScreenCommand -> goForward()
-                    is BackScreenCommand -> goBack()
-                    is BackToScreenCommand -> backTo(it.screenId)
-                    else -> nextScreen(it.screenId, it.params)
+        if (count == 0) {
+            subscription.apply {
+                source.navigationLiveData.sub {
+                    when (it) {
+                        is ForwardScreenCommand -> goForward()
+                        is BackScreenCommand -> goBack()
+                        is BackToScreenCommand -> backTo(it.screenId)
+                        else -> nextScreen(it.screenId, it.params)
+                    }
                 }
             }
         }
+        count++
     }
 
     override fun nextScreen(screenId: Int, params: Any?) {
@@ -39,6 +43,6 @@ class NavigationDelegate : INavigationDelegate {
     }
 
     override fun backTo(screenId: Int) {
-        navController.popBackStack(screenId, true)//TODO inclusive question
+        navController.popBackStack(screenId, false)//TODO inclusive question
     }
 }
