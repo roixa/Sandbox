@@ -26,10 +26,10 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessag
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.INavigationDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.NavigationDelegate
-import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseLifecycleViewModel
+import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseViewModel
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseToolbarFragment<ViewModel : BaseLifecycleViewModel, DataBinding : ViewDataBinding> : Fragment()
+abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : ViewDataBinding> : Fragment()
         , LayoutIdProvider
         , IDatabindingHandleDelegate<DataBinding, ViewModel> by DatabindingHandleDelegate()
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
