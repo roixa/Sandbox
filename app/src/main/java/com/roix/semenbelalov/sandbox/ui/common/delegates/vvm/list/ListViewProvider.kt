@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 interface ListViewProvider {
-    fun getItemLayoutId(): Int
+    val itemLayoutId: Int
     fun getRecyclerView(): RecyclerView
     fun getSwipeToRefreshLayout(): SwipeRefreshLayout?
 }

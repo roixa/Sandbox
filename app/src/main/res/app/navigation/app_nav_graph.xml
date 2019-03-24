@@ -2,14 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/feature_main_nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/SplashFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@+id/SplashFragment"
         android:name="com.roix.semenbelalov.sandbox.ui.splash.views.SplashFragment"
         android:label="SplashFragment" />
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/MainFragment"
         android:name="com.roix.semenbelalov.sandbox.ui.main.views.MainFragment"
         android:label="MainFragment" />
+    <fragment
+        android:id="@+id/FeedFragment"
+        android:name="com.roix.semenbelalov.sandbox.ui.feed.views.FeedFragment"
+        android:label="FeedFragment" />
 </navigation>

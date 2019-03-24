@@ -1,8 +1,8 @@
 package com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick
 
-import android.app.Application
+import com.roix.semenbelalov.sandbox.application.CommonApplication
 
 interface IDIDelegate {
-    fun initDIDelegate(application: Application, moduleProvider: ModuleProvider)
+    fun initDIDelegate(application: CommonApplication, moduleProvider: ModuleProvider, injectingObject: Any)
     fun clearDiDelegate()
 }

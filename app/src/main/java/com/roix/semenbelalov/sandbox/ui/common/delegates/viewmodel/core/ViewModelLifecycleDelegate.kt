@@ -17,8 +17,6 @@ class ViewModelLifecycleDelegate : IViewModelLyfecycleDelegate {
 
     }
 
-
-
     override fun onBindFirstView(application: Application) {
         onBindFirstView()
     }

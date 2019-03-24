@@ -50,12 +50,12 @@ abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : View
         initErrorHandle(this, viewModel)
         initShowMessageHandle(activity!!, this, viewModel)
 
-        viewModel.onBindView(activity!!.application)
 
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel.onBindView(activity!!.application)
         setupUi()
         val ret = initBinding(activity as AppCompatActivity, layoutId, inflater, container, viewModel).root
         initToolbarDelegate(this, this, this, activity as Context)

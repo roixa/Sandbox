@@ -16,7 +16,7 @@ class ListHandleViewDelagate<Item, ItemDataBinding : ViewDataBinding> : IListHan
         viewProvider.getRecyclerView().apply {
             val manager = LinearLayoutManager(context)
             layoutManager = manager
-            databindingAdapter = BaseDataBindingAdapter(viewProvider.getItemLayoutId())
+            databindingAdapter = BaseDataBindingAdapter(viewProvider.itemLayoutId)
             adapter = databindingAdapter
             viewProvider.getSwipeToRefreshLayout()?.setOnRefreshListener(SwipeToRefreshListListener())
         }

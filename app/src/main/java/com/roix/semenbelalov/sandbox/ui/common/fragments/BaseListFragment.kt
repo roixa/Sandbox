@@ -48,21 +48,21 @@ abstract class BaseListFragment<ViewModel : BaseListViewModel<Item>, DataBinding
         initLiveDataSubscription(this)
         initErrorHandle(this, viewModel)
         initShowMessageHandle(activity!!, this, viewModel)
-        initListHandle(this, this, viewModel)
 
-        viewModel.onBindView(activity!!.application)
 
     }
 
     open fun setupBinding() {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel.onBindView(activity!!.application)
         setupUi()
         return initBinding(activity as AppCompatActivity, layoutId, inflater, container, viewModel).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListHandle(this, this, viewModel)
         initNavigationHandle(binding.root, this, viewModel)
         setupBinding()
     }

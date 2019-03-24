@@ -20,6 +20,6 @@ class SplashViewModel : BaseViewModel() {
 
 
     fun onClickedButton() {
-        nextScreen(R.id.mainFragment)
+        nextScreen(R.id.MainFragment)
     }
 }

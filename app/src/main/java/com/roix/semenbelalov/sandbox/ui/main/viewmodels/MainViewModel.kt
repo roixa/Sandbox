@@ -1,5 +1,6 @@
 package com.roix.semenbelalov.sandbox.ui.main.viewmodels
 
+import com.roix.semenbelalov.sandbox.R
 import com.roix.semenbelalov.sandbox.buissness.main.IMainInteractor
 import com.roix.semenbelalov.sandbox.di.main.MainModule
 import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseViewModel
@@ -16,4 +17,8 @@ class MainViewModel : BaseViewModel() {
     protected lateinit var interactor: IMainInteractor
 
     override val module: Module = MainModule()
+
+    fun onButtonClicked() {
+        nextScreen(R.id.FeedFragment)
+    }
 }

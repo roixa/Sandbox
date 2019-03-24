@@ -49,13 +49,13 @@ abstract class BaseDatabindingFragment<ViewModel : BaseViewModel, DataBinding : 
         initErrorHandle(this, viewModel)
         initShowMessageHandle(activity!!, this, viewModel)
 
-        viewModel.onBindView(activity!!.application )
 
     }
 
     open fun setupBinding() {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel.onBindView(activity!!.application )
         setupUi()
         return initBinding(activity as AppCompatActivity, layoutId, inflater, container, viewModel).root
     }

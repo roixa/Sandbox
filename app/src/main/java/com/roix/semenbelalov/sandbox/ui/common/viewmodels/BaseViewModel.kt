@@ -3,8 +3,7 @@ package com.roix.semenbelalov.sandbox.ui.common.viewmodels
 import android.app.Application
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.core.IViewModelLyfecycleDelegate
-import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.core.ViewModelLifecycleDelegate
+import com.roix.semenbelalov.sandbox.application.CommonApplication
 import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.DIToothpickDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.IDIDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.viewmodel.di_toothpick.ModuleProvider
@@ -26,7 +25,7 @@ import javax.inject.Inject
  * https://github.com/roixa/RoixArchitectureTemplates
  */
 abstract class BaseViewModel : ViewModel()
-        , IViewModelLyfecycleDelegate by ViewModelLifecycleDelegate()
+//        , IViewModelLyfecycleDelegate by ViewModelLifecycleDelegate()
         , IErrorHandleViewModelDelegate by ErrorHandleViewModelDelegate()
         , IShowMessageHandleViewModelDelegate by ShowMessageHandleViewModelDelegate()
         , ILoadingViewModelDelegate by LoadingViewModelDelegate()
@@ -38,10 +37,26 @@ abstract class BaseViewModel : ViewModel()
     @Inject
     lateinit var rxScheduler: RxSchedulersAbs
 
+    private var viewsCount = 0
+
     @CallSuper
-    override fun onBindFirstView(application: Application) {
-        initDIDelegate(application, this)
+    fun onBindView(application: Application) {
+        if (viewsCount == 0) {
+            onBindFirstView(application)
+        }
+        viewsCount++
+    }
+
+    @CallSuper
+    open fun onBindFirstView() {
+
+    }
+
+    @CallSuper
+    fun onBindFirstView(application: Application) {
+        initDIDelegate(application as CommonApplication, this, this)
         initSubscriptionDelegate(rxScheduler, this, this)
+        onBindFirstView()
     }
 
 

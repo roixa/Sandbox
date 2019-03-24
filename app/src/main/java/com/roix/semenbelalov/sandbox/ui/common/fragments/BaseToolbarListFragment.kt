@@ -54,15 +54,13 @@ abstract class BaseToolbarListFragment<ViewModel : BaseListViewModel<Item>, Data
         initLiveDataSubscription(this)
         initErrorHandle(this, viewModel)
         initShowMessageHandle(activity!!, this, viewModel)
-        initListHandle(this, this, viewModel)
-
-        viewModel.onBindView(activity!!.application)
 
     }
 
     open fun setupBinding() {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel.onBindView(activity!!.application)
         setupUi()
         val ret = initBinding(activity as AppCompatActivity, layoutId, inflater, container, viewModel).root
         initToolbarDelegate(this, this, this, activity as Context)
@@ -72,6 +70,7 @@ abstract class BaseToolbarListFragment<ViewModel : BaseListViewModel<Item>, Data
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNavigationHandle(view, this, viewModel)
+        initListHandle(this, this, viewModel)
         setupBinding()
     }
 

@@ -45,9 +45,9 @@ android {
         main {
             res.srcDirs = [
                     "src/main/res/common"
-                    ,"src/main/res/app"
+                    , "src/main/res/app"
                     , "src/main/res/splash"
-                    , "src/main/res/main"]
+                    , "src/main/res/main", "src/main/res/feed"]
         }
     }
 
