@@ -6,7 +6,7 @@ import toothpick.Toothpick
 
 class DIToothpickDelegate : IDIDelegate {
 
-    lateinit var viewModelScope: Scope
+    private lateinit var viewModelScope: Scope
 
     override fun initDIDelegate(application: Application, moduleProvider: ModuleProvider) {
         viewModelScope = Toothpick.openScopes(application, this)

@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.toolbar.view.*
 
 class ToolbarDelegate : IToolbarDelegate {
 
-    lateinit var databindingDelegate: IDatabindingHandleDelegate<*, *>
-    lateinit var navigationDelegate: INavigationDelegate
-    lateinit var toolbarProvider: ToolbarProvider
-    lateinit var context: Context
+    private lateinit var databindingDelegate: IDatabindingHandleDelegate<*, *>
+    private lateinit var navigationDelegate: INavigationDelegate
+    private lateinit var toolbarProvider: ToolbarProvider
+    private lateinit var context: Context
     override lateinit var toolbarType: ToolbarType
 
     override fun initToolbarDelegate(databindingDelegate: IDatabindingHandleDelegate<*, *>, navigationDelegate: INavigationDelegate, toolbar: ToolbarProvider, c: Context) {

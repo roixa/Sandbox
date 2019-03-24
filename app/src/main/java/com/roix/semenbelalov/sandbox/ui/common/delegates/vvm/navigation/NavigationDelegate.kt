@@ -10,8 +10,8 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.commands
 
 class NavigationDelegate : INavigationDelegate {
 
-    lateinit var navController: NavController
-    var count = 0
+    private lateinit var navController: NavController
+    private var count = 0
 
     override fun initNavigationHandle(view: View, subscription: ILiveDataSubscriptionDelegate, source: IViewModelNavigationDelegate) {
         navController = Navigation.findNavController(view)

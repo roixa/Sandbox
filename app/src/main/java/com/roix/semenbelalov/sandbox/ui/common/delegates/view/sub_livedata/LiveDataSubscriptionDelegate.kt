@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 
 class LiveDataSubscriptionDelegate : ILiveDataSubscriptionDelegate {
 
-    lateinit var lifecycleOwner: LifecycleOwner
+    private lateinit var lifecycleOwner: LifecycleOwner
 
     override fun initLiveDataSubscription(lo: LifecycleOwner) {
         lifecycleOwner = lo

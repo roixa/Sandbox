@@ -20,18 +20,22 @@ import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.IViewModelHand
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.core.ViewModelHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.ErrorHandleViewDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.error.IErrorHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list.IListHandleViewDelegate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list.ListHandleViewDelagate
+import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.list.ListViewProvider
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.ILoadingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.loading.LoadingHandleDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.IShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.message.ShowMessageDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.INavigationDelegate
 import com.roix.semenbelalov.sandbox.ui.common.delegates.vvm.navigation.NavigationDelegate
-import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseViewModel
+import com.roix.semenbelalov.sandbox.ui.common.viewmodels.BaseListViewModel
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : ViewDataBinding> : Fragment()
+abstract class BaseToolbarListFragment<ViewModel : BaseListViewModel<Item>, DataBinding : ViewDataBinding, Item, ItemDataBinding : ViewDataBinding> : Fragment()
         , LayoutIdProvider
         , ToolbarProvider
+        , ListViewProvider
         , IDatabindingHandleDelegate<DataBinding, ViewModel> by DatabindingHandleDelegate()
         , ILiveDataSubscriptionDelegate by LiveDataSubscriptionDelegate()
         , IErrorHandleViewDelegate by ErrorHandleViewDelegate()
@@ -39,7 +43,8 @@ abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : View
         , ILoadingHandleDelegate by LoadingHandleDelegate()
         , IViewModelHandleDelegate<ViewModel> by ViewModelHandleDelegate<ViewModel>()
         , INavigationDelegate by NavigationDelegate()
-        , IToolbarDelegate by ToolbarDelegate() {
+        , IToolbarDelegate by ToolbarDelegate()
+        , IListHandleViewDelegate<Item> by ListHandleViewDelagate<Item, ItemDataBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +54,13 @@ abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : View
         initLiveDataSubscription(this)
         initErrorHandle(this, viewModel)
         initShowMessageHandle(activity!!, this, viewModel)
+        initListHandle(this, this, viewModel)
 
         viewModel.onBindView(activity!!.application)
 
     }
 
+    open fun setupBinding() {}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         setupUi()
@@ -64,7 +71,7 @@ abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initNavigationHandle(binding.root, this, viewModel)
+        initNavigationHandle(view, this, viewModel)
         setupBinding()
     }
 
@@ -72,11 +79,8 @@ abstract class BaseToolbarFragment<ViewModel : BaseViewModel, DataBinding : View
 
     }
 
-    protected open fun setupBinding() {}
-
     private fun getViewModelJavaClass(): Class<ViewModel> {
         return (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<ViewModel>
     }
-
 
 }

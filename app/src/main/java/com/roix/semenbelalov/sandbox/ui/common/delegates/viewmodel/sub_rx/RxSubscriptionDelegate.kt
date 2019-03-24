@@ -11,9 +11,9 @@ import io.reactivex.disposables.CompositeDisposable
 class RxSubscriptionDelegate : IRxSubscriptionDelegate {
 
     val subscription: CompositeDisposable = CompositeDisposable()
-    lateinit var rxScheduler: RxSchedulersAbs
-    lateinit var loading: ILoadingViewModelDelegate
-    lateinit var error: IErrorHandleViewModelDelegate
+    private lateinit var rxScheduler: RxSchedulersAbs
+    private lateinit var loading: ILoadingViewModelDelegate
+    private lateinit var error: IErrorHandleViewModelDelegate
 
     override fun initSubscriptionDelegate(rxScheduler: RxSchedulersAbs, loading: ILoadingViewModelDelegate, error: IErrorHandleViewModelDelegate) {
         this.rxScheduler = rxScheduler
