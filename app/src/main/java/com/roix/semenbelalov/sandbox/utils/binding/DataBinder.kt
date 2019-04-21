@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.databinding.ObservableList
+import com.squareup.picasso.Picasso
 
 /**
  * Created by roix template
