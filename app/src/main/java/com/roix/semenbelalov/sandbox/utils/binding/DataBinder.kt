@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.databinding.ObservableList
-import com.squareup.picasso.Picasso
 
 /**
  * Created by roix template
@@ -26,7 +25,7 @@ fun setSrcVector(imageView: ImageView, @DrawableRes res: Int) {
 
 @BindingAdapter("bind:imageUrl")
 fun setImageUrl(imageView: ImageView, url: String) {
-    Picasso.with(imageView.context).load(url).into(imageView)
+    Picasso.get().load(url).into(imageView)
 }
 
 
