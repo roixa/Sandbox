@@ -21,6 +21,9 @@ class MainFragment : BaseToolbarFragment<MainViewModel, FragmentMainBinding>() {
         super.setupBinding()
         toolbarType.title.value = getString(R.string.title_main)
         toolbarType.subtitle.value = getString(R.string.app_name)
+        binding.button.setOnClickListener {
+            viewModel.onButtonClicked()
+        }
     }
 }
 

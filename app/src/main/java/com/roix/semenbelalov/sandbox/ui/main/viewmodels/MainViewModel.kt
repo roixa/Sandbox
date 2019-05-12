@@ -13,10 +13,11 @@ import javax.inject.Inject
  */
 class MainViewModel : BaseViewModel() {
 
+    override val module: Module = MainModule()
+
     @Inject
     protected lateinit var interactor: IMainInteractor
 
-    override val module: Module = MainModule()
 
     fun onButtonClicked() {
         nextScreen(R.id.FeedFragment)

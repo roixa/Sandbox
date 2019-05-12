@@ -15,10 +15,11 @@ class ListHandleViewDelagate<Item, ItemDataBinding : ViewDataBinding> : IListHan
         viewModel = source
         viewProvider.getRecyclerView().apply {
             val manager = LinearLayoutManager(context)
-            layoutManager = manager
             databindingAdapter = BaseDataBindingAdapter(viewProvider.itemLayoutId)
-            adapter = databindingAdapter
             viewProvider.getSwipeToRefreshLayout()?.setOnRefreshListener(SwipeToRefreshListListener())
+
+            layoutManager = manager
+            adapter = databindingAdapter
         }
         subscription.apply {
             source.items.sub {
