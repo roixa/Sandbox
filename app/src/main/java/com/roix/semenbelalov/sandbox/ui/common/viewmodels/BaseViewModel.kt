@@ -54,7 +54,7 @@ abstract class BaseViewModel : ViewModel()
 
     @CallSuper
     fun onBindFirstView(application: Application) {
-        initDIDelegate(application as CommonApplication, this, this)
+        initDIDelegate(application as CommonApplication, this, this, this)
         initSubscriptionDelegate(rxScheduler, this, this)
         onBindFirstView()
     }

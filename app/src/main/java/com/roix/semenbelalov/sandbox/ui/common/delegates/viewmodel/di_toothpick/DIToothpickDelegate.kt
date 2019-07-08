@@ -8,8 +8,8 @@ class DIToothpickDelegate : IDIDelegate {
 
     private lateinit var viewModelScope: Scope
 
-    override fun initDIDelegate(application: CommonApplication, moduleProvider: ModuleProvider, injectingObject: Any) {
-        viewModelScope = Toothpick.openScopes(application, this)
+    override fun initDIDelegate(application: CommonApplication, moduleProvider: ModuleProvider, injectingObject: Any, injectTag: Any) {
+        viewModelScope = Toothpick.openScopes(application, injectTag)
         viewModelScope.installModules(moduleProvider.module)
         Toothpick.inject(injectingObject, viewModelScope)
     }
